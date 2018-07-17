@@ -68,18 +68,35 @@
         <div class="flex-center position-ref full-height">
             @if (Route::has('login'))
                 <div class="top-right links">
-                    @auth
-                        <a href="{{ url('/home') }}">Home</a>
-                    @else
-                        <a href="{{ route('login') }}">Login</a>
-                        <a href="{{ route('register') }}">Register</a>
-                    @endauth
+                    <div class="card">
+                        <div class="card-header"><a href="#">{{App::isLocale('uz') ? "O'zbek" : (App::isLocale('en') ? "English" : "Русский")}}</a></div>
+                        <div class="card-body">
+                            @if(App::isLocale('uz'))
+                            
+                                    <a href="{{route('lang.switch', "ru")}}">Русский</a>
+                                
+                                    <a href="{{route('lang.switch', "en")}}">English</a>
+                               
+                            @elseif(App::isLocale('en'))
+                          
+                                    <a href="{{route('lang.switch', "ru")}}">Русский</a>
+        
+                                    <a href="{{route('lang.switch', "uz")}}">O'zbek</a>
+                               
+                            @else
+                                    <a href="{{route('lang.switch', "uz")}}">O'zbek</a>
+                                
+                                    <a href="{{route('lang.switch', "en")}}">English</a>
+                              
+                            @endif
+                        </div>
+                    </div>
                 </div>
             @endif
 
             <div class="content">
                 <div class="title m-b-md">
-                    Laravel
+                    {{App::getLocale()}}
                 </div>
 
                 <div class="links">

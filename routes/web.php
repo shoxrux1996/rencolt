@@ -14,3 +14,15 @@
 Route::get('/', function () {
     return view('welcome');
 });
+
+Route::prefix('admin')->group(function () {
+    // Language
+    Route::get('language/texts/{lang?}/{file?}', 'LanguageAdminController@showTexts')->name('language.file');
+    Route::post('language/texts/{lang}/{file}', 'LanguageAdminController@updateTexts');
+});
+
+Route::get('setlocale/{locale}', 'LanguageController@setLocale')->name('lang.switch');
+
+Auth::routes();
+
+Route::get('/admin', 'HomeController@index')->name('home');
