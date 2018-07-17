@@ -1,7 +1,7 @@
-<div class="form-group">
-	<label for="{{ $key }}" class="col-sm-2 control-label">{{ str_replace(['_', '-'], ' ', $key) }}</label>
+<div class="form-group row">
+	<label for="{{ $key }}" class="col-sm-2 col-form-label font-weight-bold">{{ str_replace(['_', '-'], ' ', $key) }}</label>
 	<div class="hidden-sm hidden-xs col-md-5">
-		<div class="well well-sm">
+		<div class="card card-body bg-light">
 			@php
 				if (count($parents)) {
                     $parents_array = implode('.', $parents);
@@ -25,11 +25,11 @@
 						preg_match('/^({\w}|\[[\w,]+\])([\w\s:]+)/', trim($chunck), $m);
 					@endphp
 					@if (empty($m))
-						<label for="{{ $chunck }}" class="col-sm-2 control-label">{{ (!$k ? 'singular' : 'plural').":" }}</label>
+						<label for="{{ $chunck }}" class="col-sm-2 col-form-label font-weight-bold">{{ (!$k ? 'singular' : 'plural').":" }}</label>
 						<textarea name="{{ (empty($parents) ? $key : implode('__', $parents)."__{$key}")."[after][]" }}" class="form-control" rows="2"> {{ $chunck }} </textarea>
 						<br>
 					@else
-						<label for="{{ $chunck }}" class="col-sm-2 control-label">{{ (!$k ? 'singular' : 'plural')." ($m[1]):" }}</label>
+						<label for="{{ $chunck }}" class="col-sm-2 col-form-label font-weight-bold">{{ (!$k ? 'singular' : 'plural')." ($m[1]):" }}</label>
 						<input type="hidden" name="{{ (empty($parents) ? $key : implode('__', $parents)."__{$key}")."[before][]" }}" value="{{ $m[1] }}">
 						<textarea name="{{ (empty($parents) ? $key : implode('__', $parents)."__{$key}")."[after][]" }}" class="form-control" rows="2"> {{ $m[2] }} </textarea>
 						<br>

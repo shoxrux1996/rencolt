@@ -3,7 +3,6 @@
  return [
     "different" => "The :attribute and :other must be different.",
     "same" => "The :attribute and :other must match.",
-    "confirmed" => "The :attribute confirmation does not match.",
     "date_format" => "The :attribute does not match the format :format.",
     "uploaded" => "The :attribute failed to upload.",
     "in_array" => "The :attribute field does not exist in :other.",
@@ -14,7 +13,6 @@
     "required_with_all" => "The :attribute field is required when :values is present.",
     "required_with" => "The :attribute field is required when :values is present.",
     "required_without_all" => "The :attribute field is required when none of :values are present.",
-    "required" => "The :attribute field is required.",
     "present" => "The :attribute field must be present.",
     "boolean" => "The :attribute field must be true or false.",
     "filled" => "The :attribute field must have a value.",
@@ -37,12 +35,10 @@
     "mimetypes" => "The :attribute must be a file of type: :values.",
     "file" => "The :attribute must be a file.",
     "numeric" => "The :attribute must be a number.",
-    "string" => "The :attribute must be a string.",
     "ip" => "The :attribute must be a valid IP address.",
     "ipv4" => "The :attribute must be a valid IPv4 address.",
     "ipv6" => "The :attribute must be a valid IPv6 address.",
     "json" => "The :attribute must be a valid JSON string.",
-    "email" => "The :attribute must be a valid email address.",
     "timezone" => "The :attribute must be a valid zone.",
     "accepted" => "The :attribute must be accepted.",
     "array" => "The :attribute must be an array.",
@@ -52,6 +48,10 @@
     "not_in" => "The selected :attribute is invalid.",
     "exists" => "The selected :attribute is invalid.",
     "in" => "The selected :attribute is invalid.",
+    "string" => "Атрибут должен быть строкой.",
+    "confirmed" => "Подтверждение атрибута не соответствует.",
+    "required" => "Это поле обязательно к заполнению",
+    "email" => "должен быть действительным адресом электронной почты.",
     "custom" => [
         "attribute-name" => [
             "rule-name" => "custom-message"
@@ -72,7 +72,7 @@
     "min" => [
         "numeric" => "The :attribute must be at least :min.",
         "file" => "The :attribute must be at least :min kilobytes.",
-        "string" => "The :attribute must be at least :min characters.",
+        "string" => ":attribute должен быть не менее :min символов.",
         "array" => "The :attribute must have at least :min items."
     ],
     "between" => [

@@ -61,6 +61,6 @@ class LanguageAdminController extends Controller
             // \Alert::error(trans('backpack::langfilemanager.please_fill_all_fields'))->flash();
         }
 
-        return redirect()->back();
+        return redirect()->back()->with('message','Языковые файлы успешно обновлены');
     }
 }
