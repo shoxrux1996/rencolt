@@ -6,33 +6,9 @@
 <div class="container-fluid">
     <div class="row">
       <div class="col-md-2">
-        <div class="nav flex-column nav-pills" id="v-pills-tab" role="tablist" aria-orientation="vertical">
-          <a class="nav-link" id="home-tab" data-toggle="pill" href="#home" role="tab" aria-controls="v-pills-home" aria-selected="true" onclick="switchSection('home-tab')">Home</a>
-          <a class="nav-link" id="products-tab" data-toggle="pill" href="#products" role="tab" aria-controls="v-pills-products" aria-selected="false" onclick="switchSection('products-tab')">Products</a>
-          <a class="nav-link" id="language-tab" role="tab" aria-controls="v-pills-language"
-          aria-selected="false" href="{{ route('language.file') }}">Language</a>
-
-        </div>
+        @include('navs.horizontal',['active'=>'home'])
       </div>
       <div class="col-md-10">
-        <div class="tab-content" id="v-pills-tabContent">
-          <div class="tab-pane fade" id="home" role="tabpanel" aria-labelledby="home-tab">
-          </div>
-          <div class="tab-pane fade" id="products" role="tabpanel" aria-labelledby="v-pills-products-tab">
-            <table id="example" class="table table-striped table-bordered" style="width:100%">
-              <thead>
-                  <tr>
-                      <th>Name</th>
-                      <th>Position</th>
-                      <th>Office</th>
-                      <th>Age</th>
-                      <th>Start date</th>
-                      <th>Salary</th>
-                  </tr>
-              </thead>
-            </table>
-          </div>
-        </div>
       </div>
     </div>
 </div>
@@ -41,20 +17,34 @@
   <script src="{{asset('js/jquery.cookie.js')}}"></script>
   <script type="text/javascript" src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js"></script>
   <script type="text/javascript" src="https://cdn.datatables.net/1.10.19/js/dataTables.bootstrap4.min.js"></script>
+  <script type="text/javascript" src="{{ asset('js/tinymce.js') }}"></script>
   <script>
-      function switchSection(id) {
-          $.cookie("admin", id, {expires: 7, path: '/admin'});
-          $('#'+id).tab('show');
-          
-      }
 
       window.onload = function () {
-          if (typeof $.cookie("admin") === "undefined") {
-              $.cookie("admin", "home-tab", {expires: 7, path: '/admin'});
-          }
-          var cookie = $.cookie("admin");
-          switchSection(cookie);
-          $('#example').DataTable();
+         
+           tinymce.init({
+              menubar: false,
+              selector:'textarea.richTextBox',
+              skin: 'voyager',
+              min_height: 600,
+              resize: 'vertical',
+              plugins: 'link, image, code, youtube, giphy, table, textcolor, lists',
+              extended_valid_elements : 'input[id|name|value|type|class|style|required|placeholder|autocomplete|onclick]',
+              file_browser_callback: function(field_name, url, type, win) {
+                      if(type =='image'){
+                        $('#upload_file').trigger('click');
+                      }
+                  },
+              toolbar: 'styleselect bold italic underline | forecolor backcolor | alignleft aligncenter alignright | bullist numlist outdent indent | link image table youtube giphy | code',
+              convert_urls: false,
+              image_caption: true,
+              image_title: true,
+              init_instance_callback: function (editor) {
+                  if (typeof tinymce_init_callback !== "undefined") {
+                      tinymce_init_callback(editor);
+                  }
+              }
+            });
       }
   </script>
   

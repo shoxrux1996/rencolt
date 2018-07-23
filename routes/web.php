@@ -22,6 +22,16 @@ Route::prefix('admin')->group(function () {
 
     Route::get('profile','Admin\AdminController@profile')->name('profile');
     Route::post('update/profile', 'Admin\AdminController@update')->name('update.profile');
+
+    Route::get('categories/destroy/{id?}', 'Admin\AdminCategoryController@destroy')->name('categories.destroy');
+    Route::post('categories/update/{id?}', 'Admin\AdminCategoryController@update')->name('categories.update');
+    Route::get('categories', 'Admin\AdminCategoryController@index')->name('categories.index');
+    Route::post('categories/store', 'Admin\AdminCategoryController@store')->name('categories.store');
+    Route::get('products', 'Admin\AdminProductController@products')->name('products');
+    Route::get('objects', 'Admin\AdminObjectController@objects')->name('objects');
+    Route::get('videos', 'Admin\AdminVideoController@videos')->name('videos');
+    Route::get('/', 'HomeController@index')->name('home');
+    Route::any('ajax/categories', 'Admin\AdminCategoryController@browse')->name('categories.browse');
 });
 
 Route::get('setlocale/{locale}', 'LanguageController@setLocale')->name('lang.switch');
@@ -31,4 +41,4 @@ Route::get('login', 'Auth\LoginController@showLoginForm')->name('login');
 Route::post('login', 'Auth\LoginController@login');
 Route::post('logout', 'Auth\LoginController@logout')->name('logout');
 
-Route::get('/admin', 'HomeController@index')->name('home');
+
