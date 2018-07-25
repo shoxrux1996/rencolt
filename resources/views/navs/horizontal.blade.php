@@ -6,7 +6,7 @@
     <a class="nav-link {{$active == "category" ? "active" : ""}}" href="{{ route('categories.index') }}">Категория</a>
   </li>
   <li class="nav-item">
-    <a class="nav-link {{$active == "products" ? "active" : ""}}" href="{{ route('products') }}">Продукты</a>
+    <a class="nav-link {{$active == "products" ? "active" : ""}}" href="{{ route('products.index') }}">Продукты</a>
   </li>
   <li class="nav-item">
     <a class="nav-link {{$active == "objects" ? "active" : ""}}" href="{{ route('objects') }}">Объекты</a>

@@ -1,6 +1,6 @@
 @extends('layouts.app')
 @section('styles')
-<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.19/css/dataTables.bootstrap4.min.css">
+<link rel="stylesheet" type="text/css" href="{{asset('css/dataTables.bootstrap4.min.css')}}">
 @endsection
 @section('content')
 <div class="container-fluid">
@@ -187,8 +187,8 @@
 @endsection
 @section('scripts')
   <script src="{{asset('js/jquery.cookie.js')}}"></script>
-  <script type="text/javascript" src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js"></script>
-  <script type="text/javascript" src="https://cdn.datatables.net/1.10.19/js/dataTables.bootstrap4.min.js"></script>
+  <script type="text/javascript" src="{{asset('js/jquery.dataTables.min.js')}}"></script>
+  <script type="text/javascript" src="{{asset('js/dataTables.bootstrap4.min.js')}}"></script>
  
   <script type="text/javascript" src="{{ asset('js/tinymce.js') }}"></script>
   <script>

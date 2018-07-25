@@ -86,11 +86,12 @@ class AdminCategoryController extends Controller
     }
     public function update(Request $request, $id = null){
     	$validator = Validator::make($request->all(),[
-            'name_ru'=>'required'   
+            'name_ru'=>'required',
+            'text_ru' => 'required' 
         ]);
         if($validator->fails() || $id == null){
              return redirect()->back()
-                        ->withErrors($validator, 'edit')
+                        ->withErrors($validator, 'edit')->with('id', $id)
                         ->withInput();
         }
 
