@@ -12,6 +12,7 @@ use Intervention\Image\Facades\Image;
 use Intervention\Image\Constraint;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
+use Illuminate\Validation\Rule;
 
 
 
@@ -27,6 +28,7 @@ class AdminCategoryController extends Controller
     public function store(Request $request){
     	$validator = Validator::make($request->all(),[
     		'name_ru'=>'required',
+            'slug' => 'unique:categories,slug'
     	]);
     	if($validator->fails()){
              return redirect()->back()
@@ -87,7 +89,8 @@ class AdminCategoryController extends Controller
     public function update(Request $request, $id = null){
     	$validator = Validator::make($request->all(),[
             'name_ru'=>'required',
-            'text_ru' => 'required' 
+            'text_ru' => 'required',
+            'slug' =>  Rule::unique('categories')->ignore($id, 'id')
         ]);
         if($validator->fails() || $id == null){
              return redirect()->back()

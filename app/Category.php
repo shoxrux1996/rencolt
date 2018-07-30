@@ -8,7 +8,7 @@ class Category extends Model
 {
     protected $fillable = [
         'name_ru', 'name_uz', 'name_en',
-        'title_ru', 'title_uz', 'title_en',
+        'slug',
         'text_ru', 'text_uz', 'text_en',
     ];
 
@@ -26,4 +26,14 @@ class Category extends Model
         $thumb_name = "small";
         return $path . '-' . $thumb_name . $extension;
     }    
+    public function products(){
+        return $this->belongsToMany(Product::class);
+    }
+    public function objects(){
+        return $this->belongsToMany(Object::class);
+    }
+    public function videos(){
+        return $this->belongsToMany(Video::class);
+    }
+
 }

@@ -22,6 +22,7 @@
     <link rel="stylesheet" type="text/css" href="{{ asset('css/animate.css') }}">
     <link href="{{ asset('css/font-awesome.min.css') }}" rel="stylesheet">
     @yield('styles')
+    <link href="{{ asset('css/select2.min.css') }}" rel="stylesheet" />
 </head>
 <body>
     @if(Session::has('message'))
@@ -96,6 +97,15 @@
     <script type="text/javascript" src="{{ asset('js/jquery-3.2.1.min.js') }}"></script>
     <script type="text/javascript" src="{{ asset('js/popper.min.js') }}"></script>
     <script type="text/javascript" src="{{ asset('js/bootstrap.min.js') }}"></script>
+    <script src="{{ asset('js/select2.min.js') }}"></script>
+    <script type="text/javascript">
+        $(document).ready(function() {
+            $('.select2').select2(
+            {
+                width: '100%'
+            });
+        });
+    </script>
     @yield('scripts')
    
 </body>

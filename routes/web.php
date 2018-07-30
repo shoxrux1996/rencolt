@@ -11,9 +11,21 @@
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+Route::get('/', 'WebController@index')->name('index');
+Route::get('products', 'WebController@products')->name('products');
+Route::get('product/{id}', 'WebController@product')->name('product');
+Route::get('objects','WebController@objects')->name('objects');
+Route::get('object/{id}', 'WebController@object')->name('object');
+Route::get('videos','WebController@videos')->name('videos');
+Route::get('video/{id}', 'WebController@video')->name('video');
+Route::get('category/{slug}', 'WebController@category')->name('category');
+Route::get('aboutus', 'WebController@aboutus')->name('aboutus');
+Route::get('partners', 'WebController@partners')->name('partners');
+
+Route::get('products/search', 'WebController@productsSearch')->name('products.search');
+Route::get('objects/search', 'WebController@objectsSearch')->name('objects.search');
+Route::get('videos/search' , 'WebController@videosSearch')->name('videos.search');
+Route::get('all/search','WebController@all')->name('all');
 
 Route::prefix('admin')->group(function () {
     // Language
@@ -42,11 +54,17 @@ Route::prefix('admin')->group(function () {
     Route::get('objects/edit/{id?}', 'Admin\AdminObjectController@edit')->name('objects.edit');
     Route::get('object/image/delete/{id?}/{image?}','Admin\AdminObjectController@deleteImage')->name('object.image.delete');
 
-    Route::get('videos', 'Admin\AdminVideoController@videos')->name('videos');
+    Route::get('videos/destroy/{id?}', 'Admin\AdminVideoController@destroy')->name('videos.destroy');
+    Route::post('videos/update/{id?}', 'Admin\AdminVideoController@update')->name('videos.update');
+    Route::get('videos', 'Admin\AdminVideoController@index')->name('videos.index');
+    Route::post('videos/store', 'Admin\AdminVideoController@store')->name('videos.store');
+
+    
     Route::get('/', 'HomeController@index')->name('home');
     Route::any('ajax/categories', 'Admin\AdminCategoryController@browse')->name('categories.browse');
     Route::any('ajax/products', 'Admin\AdminProductController@browse')->name('products.browse');
-
+    Route::any('ajax/objects', 'Admin\AdminObjectController@browse')->name('objects.browse');
+    Route::any('ajax/videos', 'Admin\AdminVideoController@browse')->name('videos.browse');
 });
 
 Route::get('setlocale/{locale}', 'LanguageController@setLocale')->name('lang.switch');

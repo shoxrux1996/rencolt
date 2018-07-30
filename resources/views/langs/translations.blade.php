@@ -6,13 +6,7 @@
 <div class="container-fluid">
     <div class="row">
       <div class="col-md-2">
-        <div class="nav flex-column nav-pills" id="v-pills-tab" role="tablist" aria-orientation="vertical">
-          <a class="nav-link" id="home-tab" href="{{ route('home') }}" role="tab" aria-controls="v-pills-home" aria-selected="true" onclick="switchSection('home-tab')">Home</a>
-          <a class="nav-link" id="products-tab" href="{{ route('home') }}" href="#products" role="tab" aria-controls="v-pills-products" aria-selected="false" onclick="switchSection('products-tab')">Products</a>
-          <a class="nav-link active" id="language-tab" href="language" data-toggle="pill" role="tab" aria-controls="v-pills-language"
-          aria-selected="false" >Language</a>
-
-        </div>
+                @include('navs.horizontal',['active'=>'language'])
       </div>
       <div class="col-md-10">
         <div class="tab-content" id="v-pills-tabContent">

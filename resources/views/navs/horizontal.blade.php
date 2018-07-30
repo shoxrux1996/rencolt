@@ -9,10 +9,10 @@
     <a class="nav-link {{$active == "products" ? "active" : ""}}" href="{{ route('products.index') }}">Продукты</a>
   </li>
   <li class="nav-item">
-    <a class="nav-link {{$active == "objects" ? "active" : ""}}" href="{{ route('objects') }}">Объекты</a>
+    <a class="nav-link {{$active == "objects" ? "active" : ""}}" href="{{ route('objects.index') }}">Объекты</a>
   </li>
   <li class="nav-item">
-    <a class="nav-link {{$active == "video" ? "active" : ""}}" href="{{ route('videos') }}">Видео</a>
+    <a class="nav-link {{$active == "videos" ? "active" : ""}}" href="{{ route('videos.index') }}">Видео</a>
   </li>
   <li class="nav-item">
     <a class="nav-link {{$active == "language" ? "active" : ""}}" href="{{ route('language.file') }}">Язык</a>

@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Product;
+use App\Category;
 use Illuminate\Support\Facades\Validator;
 use Yajra\DataTables\DataTables;
 
@@ -20,11 +21,13 @@ class AdminProductController extends Controller
     }
 
     public function index(){
-    	return view('products.index');
+        
+    	return view('products.index')->withCategories(Category::orderBy('id')->get());
     }
         public function store(Request $request){
     	$validator = Validator::make($request->all(),[
     		'name_ru'=>'required',
+            'categories.*.id'=>'integer|exists:categories'
     	]);
     	if($validator->fails()){
              return redirect()->back()
@@ -87,12 +90,15 @@ class AdminProductController extends Controller
         }
         
     	$category->save();
+        $category->categories()->sync($request->categories, false);
     	return redirect()->back()->with('message','Продукт успешно создан');
     }
     public function update(Request $request, $id = null){
     	
     	$validator = Validator::make($request->all(),[
-            'name_ru'=>'required'  
+            'name_ru'=>'required',
+            'categories.*.id'=>'integer|exists:categories'
+
         ]);
         if($validator->fails() || $id == null){
              return redirect()->back()
@@ -168,6 +174,8 @@ class AdminProductController extends Controller
         }
 
         $category->save();
+
+        $category->categories()->sync($request->categories);
         return redirect()->route('products.index')->with('message','Продукт успешно изменен');
     }
 
@@ -246,7 +254,7 @@ class AdminProductController extends Controller
      public function edit($id = null)
     {
     	$product = Product::findOrFail($id);
-    	return view('products.edit')->withProduct($product);
+    	return view('products.edit')->withProduct($product)->withCategories(Category::orderBy('id')->get());
     }
     public function deleteFileIfExists($path)
     {

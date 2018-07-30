@@ -81,6 +81,14 @@
                     <label for="name_en">Name</label>
                     <input type="text" class="form-control" name="name_en" id="name_en" placeholder="Name" value="{{old('name_en')}}">
                   </div>
+                  <div class="form-group">
+                    <label for="category">Категория</label>
+                    <select class="form-control select2" name="categories[]" multiple="multiple">
+                      @foreach($categories as $category)
+                        <option value="{{$category->id}}">{{$category->name_ru}}</option>
+                      @endforeach
+                    </select>
+                  </div>
                   <div class="form-row">
                     <div class="form-group col-md-4">
                        <label for="image">Изображение</label>
@@ -201,11 +209,11 @@
                         width: '10%'
                     }
                 ],
-                "language": '{!!json_encode(config('datatables.datatable', [])) !!}'
+                "language": {!!json_encode(config('datatables.datatable', [])) !!}
             });
       }
 
-      
+    
   </script>
  
   

@@ -18,12 +18,12 @@
 <div class="container-fluid">
     <div class="row">
       <div class="col-md-2">
-        @include('navs.horizontal',['active'=>'products'])
+        @include('navs.horizontal',['active'=>'objects'])
       </div>
       <div class="col-md-10">
          <ul class="nav nav-tabs" id="myTab" role="tablist">
           <li class="nav-item">
-            <a class="nav-link" id="home-tab" href="{{ route('products.index') }}" role="tab" aria-controls="home" aria-selected="true">Все продукты</a>
+            <a class="nav-link" id="home-tab" href="{{ route('objects.index') }}" role="tab" aria-controls="home" aria-selected="true">Все объекты</a>
           </li>
           <li class="nav-item active">
             <a class="nav-link active" id="edit-tab" data-toggle="tab" href="#edit" role="tab" aria-controls="edit" aria-selected="false">Изменить</a>
@@ -32,8 +32,8 @@
           <div class="tab-pane active" id="edit" role="tabpanel" aria-labelledby="edit-tab">
             <div class="card">
               <div class="card-body">
-                <h5 class="card-title"> Изменить категорию</h5>
-                <form action="{{ route('products.update', $product->id) }}" method="POST" enctype="multipart/form-data">
+                <h5 class="card-title"> Изменить объект</h5>
+                <form action="{{ route('objects.update', $product->id) }}" method="POST" enctype="multipart/form-data">
                   @csrf
                   @if($errors->edit->any())
                         <div class="alert alert-danger">
@@ -58,20 +58,29 @@
                     <input type="text" class="form-control" name="name_en" id="name_en" placeholder="Name" value="{{$product->name_en}}">
                   </div>
 
+                   <div class="form-group">
+                    <label for="category">Категория</label>
+                    <select class="form-control select2" id="select2-edit" name="categories[]" multiple="multiple">
+                      @foreach($categories as $key=> $category)
+                        <option value="{{$category->id}}" {{in_array($category->id, $product->categories->pluck('id')->toArray()) ? 'selected' : ''}}>{{$category->name_ru}}</option>
+                      @endforeach
+                    </select>
+                  </div>
+
                   <div class="form-row" style="margin-bottom: 10px; ">
 
                     <div class="form-group col-md-4">
                        <label for="image">Изображение</label>
                        <input type="file" class="form-control" name="images[]" id="category-edit-img" multiple="multiple">
                     </div>
-                    
+                    @if(json_decode($product->images) != null)
                       @foreach(json_decode($product->images) as $key => $image)
                         <div class="col-md-4">
                           <img src="{{ asset('storage/'.$image) }}" class="custom-images">
-                           <a href="{{ route('product.image.delete', ['id' => $product->id, 'image'=>$key]) }}" onclick="return confirm(\'Хотите Удалить\')" title="Удалить" class="btn btn-sm btn-danger"> <span class="">Удалить</span></a>
+                           <a href="{{ route('object.image.delete', ['id' => $product->id, 'image'=>$key]) }}" onclick="return confirm(\'Хотите Удалить\')" title="Удалить" class="btn btn-sm btn-danger"> <span class="">Удалить</span></a>
                         </div>
                       @endforeach
-                   
+                   @endif
                   </div>
 
                   <div class="form-group">
@@ -141,7 +150,7 @@
                 processing: true,
                 serverSide: true,
                 ajax: {
-                    url: '{{ route('products.browse') }}',
+                    url: '{{ route('objects.browse') }}',
                     type: 'POST',
                     data: {
                         '_token': '{{ csrf_token() }}'
@@ -177,8 +186,8 @@
                     {
                         orderable:false,
                         data: null, render: function (data, type, full, meta) {
-                          var url = '{{ route('products.edit', null) }}';
-                          var href='{{ route('products.destroy', null) }}';
+                          var url = '{{ route('objects.edit', null) }}';
+                          var href='{{ route('objects.destroy', null) }}';
                         return '<a href="'+url+'/'+data.id+'" title="Изменить" class="btn btn-sm btn-primary edit pull-right"> <span class="">Изменить</span></a>' + '<a href="'+href+'/'+data.id+'" onclick="return confirm(\'Хотите Удалить\')" title="Удалить" class="btn btn-sm btn-danger delete pull-right"> <span class="">Удалить</span></a>';
                         },
                         width: '10%'

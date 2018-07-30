@@ -75,6 +75,10 @@
                     <label for="name_en">Name</label>
                     <input type="text" class="form-control" name="name_en" id="name_en" placeholder="Name" value="{{old('name_en')}}">
                   </div>
+                  <div class="form-group">
+                    <label for="slug">Slug</label>
+                    <input type="text" class="form-control" name="slug" id="slug" placeholder="Slug" data-name="Slug" value="" data-slug-origin="name_ru">
+                  </div>
                   <div class="form-row">
                     <div class="form-group col-md-4">
                        <label for="image">Изображение</label>
@@ -141,6 +145,10 @@
                     <label for="name_en">Name</label>
                     <input type="text" class="form-control" name="name_en" id="name_en" placeholder="Name" value="{{old('name_en')}}">
                   </div>
+                  <div class="form-group">
+                    <label for="slug">Slug</label>
+                    <input type="text" class="form-control" name="slug" id="slug" placeholder="Slug" data-name="Slug" value="{{old('slug')}}" data-slug-origin="name_ru" data-slug-forceupdate=true>
+                  </div>
                   <div class="form-row">
                     <div class="form-group col-md-4">
                        <label for="image">Изображение</label>
@@ -191,6 +199,7 @@
   <script type="text/javascript" src="{{asset('js/dataTables.bootstrap4.min.js')}}"></script>
  
   <script type="text/javascript" src="{{ asset('js/tinymce.js') }}"></script>
+  <script type="text/javascript" src="{{ asset('js/slugify.js') }}"></script>
   <script>
 
       var table;
@@ -206,7 +215,7 @@
             $(edit).find('#name_uz').val(data.name_uz);
 
             $(edit).find('#name_en').val(data.name_en);
-
+            $(edit).find('#slug').val(data.slug);
             if(data.text_ru != null){
                tinymce.get('text_ru').setContent(data.text_ru);
             }
@@ -225,6 +234,10 @@
             
       }
       window.onload = function () {
+            @if($errors->any())
+                $('#myTab a[href="#profile"]').tab('show');
+                
+            @endif
            @if ($errors->edit->any())
                 $('.edit-nav').removeClass('d-none');
                 $('.nav-tabs a:last').tab('show');
@@ -336,7 +349,13 @@
         readURL2(this);
     });
 
+
    
+</script>
+<script>
+    $(function(){
+        $('#name_ru').slugIt();
+    });
 </script>
   
 @endsection

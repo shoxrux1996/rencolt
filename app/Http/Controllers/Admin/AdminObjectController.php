@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Object;
+use App\Category;
 use Illuminate\Support\Facades\Validator;
 use Yajra\DataTables\DataTables;
 
@@ -20,7 +21,8 @@ class AdminObjectController extends Controller
     }
 
     public function index(){
-    	return view('objects.index');
+
+    	return view('objects.index')->withCategories(Category::orderBy('id')->get());
     }
     public function store(Request $request){
     	$validator = Validator::make($request->all(),[
@@ -87,6 +89,8 @@ class AdminObjectController extends Controller
         }
         
     	$category->save();
+        $category->categories()->sync($request->categories, false);
+
     	return redirect()->back()->with('message','Объект успешно создан');
     }
     public function update(Request $request, $id = null){
@@ -161,13 +165,19 @@ class AdminObjectController extends Controller
 	        }
 
 	        $images = json_decode($category->images);
+                
+            if($images != null || $images != ""){
+	            $images = json_encode(array_merge($images,$filesPath));
+            }else{
+                $images = json_encode($filesPath);
+            }
             
-	        $images = json_encode(array_merge($images,$filesPath));
-		
-        	$category->images = $images;
+            $category->images = $images;
         }
 
         $category->save();
+        $category->categories()->sync($request->categories);
+
         return redirect()->route('objects.index')->with('message','Объект успешно изменен');
     }
 
@@ -246,7 +256,7 @@ class AdminObjectController extends Controller
      public function edit($id = null)
     {
     	$product = Object::findOrFail($id);
-    	return view('objects.edit')->withProduct($product);
+    	return view('objects.edit')->withProduct($product)->withCategories(Category::orderBy('id')->get());
     }
     public function deleteFileIfExists($path)
     {

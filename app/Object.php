@@ -25,4 +25,7 @@ class Object extends Model
         $thumb_name = "small";
         return $path . '-' . $thumb_name . $extension;
     }  
+    public function categories(){
+        return $this->belongsToMany(Category::class);
+    }
 }
