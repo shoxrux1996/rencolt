@@ -1,50 +1,84 @@
 @extends('layouts.app')
 @section('styles')
-<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.19/css/dataTables.bootstrap4.min.css">
+<link rel="stylesheet" type="text/css" href="{{asset('css/dataTables.bootstrap4.min.css')}}">
 @endsection
 @section('content')
 <div class="container-fluid">
-    <div class="row">
-      <div class="col-md-2">
+  <div class="row">
+    <div class="col-md-2">
         @include('navs.horizontal',['active'=>'home'])
-      </div>
-      <div class="col-md-10">
-      </div>
     </div>
-</div>
+    <div class="col-md-10">
+      <div class="card bg-light">
+        
+        <div class="card-body">
+            <h5 class="card-title">Собщение</h5>
+            <table id="message-table" class="table table-bordered realization-theader " cellspacing="0"
+                             width="100%">
+                          <thead>
+                          <tr>
+                              <th>
+                                Название
+                              </th>
+                              <th>
+                                Телефон
+                              </th>
+                              <th>
+                                Текст
+                              </th>
+                              <th>
+                                
+                              </th>
+                          </tr>
+                        </thead>
+              </table>
+        </div>
+       </div>
+    </div>
+
+  </div>
+  </div>
+
 @endsection
 @section('scripts')
   <script src="{{asset('js/jquery.cookie.js')}}"></script>
-  <script type="text/javascript" src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js"></script>
-  <script type="text/javascript" src="https://cdn.datatables.net/1.10.19/js/dataTables.bootstrap4.min.js"></script>
-  <script type="text/javascript" src="{{ asset('js/tinymce.js') }}"></script>
-  <script>
+  <script type="text/javascript" src="{{asset('js/jquery.dataTables.min.js')}}"></script>
+  <script type="text/javascript" src="{{asset('js/dataTables.bootstrap4.min.js')}}"></script>
 
+  <script>
+    var table;
       window.onload = function () {
-         
-           tinymce.init({
-              menubar: false,
-              selector:'textarea.richTextBox',
-              skin: 'voyager',
-              min_height: 600,
-              resize: 'vertical',
-              plugins: 'link, image, code, youtube, giphy, table, textcolor, lists',
-              extended_valid_elements : 'input[id|name|value|type|class|style|required|placeholder|autocomplete|onclick]',
-              file_browser_callback: function(field_name, url, type, win) {
-                      if(type =='image'){
-                        $('#upload_file').trigger('click');
-                      }
-                  },
-              toolbar: 'styleselect bold italic underline | forecolor backcolor | alignleft aligncenter alignright | bullist numlist outdent indent | link image table youtube giphy | code',
-              convert_urls: false,
-              image_caption: true,
-              image_title: true,
-              init_instance_callback: function (editor) {
-                  if (typeof tinymce_init_callback !== "undefined") {
-                      tinymce_init_callback(editor);
-                  }
-              }
-            });
+           table = $('#message-table').DataTable({
+            processing: true,
+            serverSide: true,
+            ajax: {
+                url: '{{ route('messages.browse') }}',
+                type: 'POST',
+                data: {
+                    '_token': '{{ csrf_token() }}'
+                }
+            },
+            columns: [
+                {
+                    data: "name"
+                },
+                {
+                    data: "phone"
+                },
+                {
+                    data: "text"
+                },
+                {
+                    orderable:false,
+                    data: null, render: function (data, type, full, meta) {
+                      var href='{{ route('messages.destroy', null) }}';
+                    return '<a href="'+href+'/'+data.id+'" onclick="return confirm(\'Хотите Удалить\')" title="Удалить" class="btn btn-sm btn-danger delete pull-right"> <span class="">Удалить</span></a>';
+                    },
+                    width: '10%'
+                }
+            ],
+            "language": {!!json_encode(config('datatables.datatable', [])) !!}
+        });
       }
   </script>
   

@@ -18,9 +18,10 @@ Route::get('objects','WebController@objects')->name('objects');
 Route::get('object/{id}', 'WebController@object')->name('object');
 Route::get('videos','WebController@videos')->name('videos');
 Route::get('video/{id}', 'WebController@video')->name('video');
-Route::get('category/{slug}', 'WebController@category')->name('category');
+Route::get('category/{name}', 'WebController@category')->name('category');
 Route::get('aboutus', 'WebController@aboutus')->name('aboutus');
 Route::get('partners', 'WebController@partners')->name('partners');
+Route::post('telegram','WebController@telegram')->name('telegram');
 
 Route::get('products/search', 'WebController@productsSearch')->name('products.search');
 Route::get('objects/search', 'WebController@objectsSearch')->name('objects.search');
@@ -65,6 +66,9 @@ Route::prefix('admin')->group(function () {
     Route::any('ajax/products', 'Admin\AdminProductController@browse')->name('products.browse');
     Route::any('ajax/objects', 'Admin\AdminObjectController@browse')->name('objects.browse');
     Route::any('ajax/videos', 'Admin\AdminVideoController@browse')->name('videos.browse');
+    Route::any('ajax/messages', 'Admin\AdminMessageController@browse')->name('messages.browse');
+
+    Route::get('messages/destroy/{id?}', 'Admin\AdminMessageController@destroy')->name('messages.destroy');
 });
 
 Route::get('setlocale/{locale}', 'LanguageController@setLocale')->name('lang.switch');

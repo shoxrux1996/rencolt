@@ -4,7 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
-use App\Object;
+use App\Objec as Object;
 use App\Category;
 use Illuminate\Support\Facades\Validator;
 use Yajra\DataTables\DataTables;
