@@ -4,7 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
-use App\Objec as Object;
+use App\Objec;
 use App\Category;
 use Illuminate\Support\Facades\Validator;
 use Yajra\DataTables\DataTables;
@@ -33,7 +33,7 @@ class AdminObjectController extends Controller
                         ->withErrors($validator)
                         ->withInput();
         }
-    	$category = new Object($request->all());
+    	$category = new Objec($request->all());
     	$filesPath = [];
 
         if ($files = $request->file('images')) {
@@ -104,7 +104,7 @@ class AdminObjectController extends Controller
                         ->withInput();
         }
 
-        $category = Object::findOrFail($id);
+        $category = Objec::findOrFail($id);
         $category->name_ru = $request->name_ru;
         $category->name_uz = $request->name_uz;
         $category->name_en = $request->name_en;
@@ -183,7 +183,7 @@ class AdminObjectController extends Controller
 
 
     public function browse(){
-    	$categories = Object::orderByDesc('created_at')->get();
+    	$categories = Objec::orderByDesc('created_at')->get();
     	return DataTables::of($categories)->rawColumns(['text_ru','text_uz', 'text_en'])->editColumn('images', function(Object $product){
     		return json_decode($product->images);
     	})->make(true);
@@ -219,7 +219,7 @@ class AdminObjectController extends Controller
 
     public function destroy($id = null){
         if($id != null){
-            $category = Object::findOrFail($id);
+            $category = Objec::findOrFail($id);
             $images = json_decode($category->images);
             if($images != null){
                 foreach ($images as $key => $image) {
@@ -234,7 +234,7 @@ class AdminObjectController extends Controller
     }
     public function deleteImage($id, $image){
     	
-	    	$product = Object::findOrFail($id);
+	    	$product = Objec::findOrFail($id);
 	    	// Decode field value
 	        $fieldData = @json_decode($product->images, true);
 	        
@@ -255,7 +255,7 @@ class AdminObjectController extends Controller
     }
      public function edit($id = null)
     {
-    	$product = Object::findOrFail($id);
+    	$product = Objec::findOrFail($id);
     	return view('objects.edit')->withProduct($product)->withCategories(Category::orderBy('id')->get());
     }
     public function deleteFileIfExists($path)

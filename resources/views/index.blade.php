@@ -30,7 +30,7 @@
                         <div class="col-md-4 ">
                             <div class="team">
                                 <div class="team-player btn-tooltip hvr-curl-top-right">
-                                    <a href="{{get_class($product) == 'App\Video' ? route('video', $product->id) : (get_class($product) == 'App\Object' ? route('object', $product->id) : route('product', $product->id))}}">
+                                    <a href="{{get_class($product) == 'App\Video' ? route('video', $product->id) : (get_class($product) == 'App\Objec' ? route('object', $product->id) : route('product', $product->id))}}">
                                         @if(get_class($product) != 'App\Video')
                                             @if(json_decode($product->images) != null)
                                             <img src="{{ asset('storage/'.json_decode($product->images)[0]) }}" alt="Thumbnail Image" class="img-raised img-rounded" width="250" height="200">
@@ -42,7 +42,7 @@
                                         @endif
                                     </a>
                                     <h4 class="title text-center">{{$product->getTranslatedAttribute('name')}} <br />
-                                        <a href="{{get_class($product) == 'App\Video' ? route('video', $product->id) : (get_class($product) == 'App\Object' ? route('object', $product->id) : route('product', $product->id))}}"><small class="text-muted btn btn-info btn-simple btn-sm">@lang('главная.смотреть') <i class="material-icons">visibility</i></small></a>
+                                        <a href="{{get_class($product) == 'App\Video' ? route('video', $product->id) : (get_class($product) == 'App\Objec' ? route('object', $product->id) : route('product', $product->id))}}"><small class="text-muted btn btn-info btn-simple btn-sm">@lang('главная.смотреть') <i class="material-icons">visibility</i></small></a>
                                     </h4>
                                 </div>
                             </div>

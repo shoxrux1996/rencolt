@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Product;
 use App\Category;
-use App\Objec as Object;
+use App\Objec;
 use App\Video;
 use App\Message;
 use Illuminate\Support\Facades\Validator;
@@ -14,7 +14,7 @@ class WebController extends Controller
 {
     public function index(){
         $products = Product::orderByDesc('created_at')->take(3)->get();
-        $objects = Object::orderByDesc('created_at')->take(3)->get();
+        $objects = Objec::orderByDesc('created_at')->take(3)->get();
         $videos = Video::orderByDesc('created_at')->take(3)->get();
         $products = collect($products);
         $objects = collect($objects);
@@ -73,20 +73,20 @@ class WebController extends Controller
     	return view('products')->withCategories(Category::all())->withNewProducts(Product::orderByDesc('created_at')->take(4)->get())->withProducts($products);
     }
     public function objects(){
-    	return view('objects')->withCategories(Category::all())->withNewProducts(Object::orderByDesc('created_at')->take(4)->get())->withProducts(Object::orderByDesc('id')->paginate(12));
+    	return view('objects')->withCategories(Category::all())->withNewProducts(Objec::orderByDesc('created_at')->take(4)->get())->withProducts(Objec::orderByDesc('id')->paginate(12));
     }
     public function object($id){
-        $product = Object::findOrFail($id);
-        $products = Object::whereHas('categories', function($query) use($product){
+        $product = Objec::findOrFail($id);
+        $products = Objec::whereHas('categories', function($query) use($product){
             $query->whereIn('id', $product->categories->pluck('id'));
         })->where('id','!=', $id);
         
-        return view('object_detail')->withCategories(Category::all())->withNewProducts(Object::orderByDesc('created_at')->take(4)->get())->withProduct($product)
+        return view('object_detail')->withCategories(Category::all())->withNewProducts(Objec::orderByDesc('created_at')->take(4)->get())->withProduct($product)
         ->withRelatedProducts($products->take(4)->get());
     }
     public function objectsSearch(Request $request){
 
-    	$products = Object::orderByDesc('id');
+    	$products = Objec::orderByDesc('id');
 
     	if($request->search != null && $request->search != ''){
     		$search = $request->search;
@@ -114,7 +114,7 @@ class WebController extends Controller
     	}
     	$products = $products->paginate(12);
 
-    	return view('objects')->withCategories(Category::all())->withNewProducts(Object::orderByDesc('created_at')->take(4)->get())->withProducts($products);
+    	return view('objects')->withCategories(Category::all())->withNewProducts(Objec::orderByDesc('created_at')->take(4)->get())->withProducts($products);
     }
 
     public function videos(){
@@ -163,7 +163,7 @@ class WebController extends Controller
     }
     public function all(Request $request){
         $products = Product::orderByDesc('id');
-        $objects = Object::orderByDesc('id');
+        $objects = Objec::orderByDesc('id');
         $videos = Video::orderByDesc('id');
 
         if($request->search != null && $request->search != ''){
@@ -254,8 +254,8 @@ class WebController extends Controller
                         ->withInput();
         }
         if($request->class != null && $request->id != null){
-            if($request->class == 'App\Object'){
-                $product= Object::findOrFail($request->id);
+            if($request->class == 'App\Objec'){
+                $product= Objec::findOrFail($request->id);
             }else{
                 $product= Product::findOrFail($request->id);
             }
