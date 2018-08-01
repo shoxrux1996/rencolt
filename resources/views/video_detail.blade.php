@@ -34,9 +34,21 @@
                                             <h3 class="title">@lang('видео.категории')</h3>
                                             <input type="hidden" name="category" id="category">
 
-                                            @foreach($categories as $category )
-                                            <a href="#" onclick="formSubmit('{{$category->name_ru}}')" id="cs23"><h6 class="description">{{$category->getTranslatedAttribute('name')}} &ensp; &ensp; &ensp;&ensp;&ensp;&ensp;&ensp; {{$category->videos->count() != 0 ? $category->videos->count() : ''}}</h6></a>
-                                            @endforeach
+                                            <table class="table">
+                                                <tbody>
+                                                    @foreach($categories as $category )
+                                                    <tr>
+                                                        <td>
+                                                            <a href="#" onclick="formSubmit('{{$category->name_ru}}')" id="cs23"><h6 class="description">{{$category->getTranslatedAttribute('name')}} </h6></a>
+                                                        </td>
+                                                        <td>
+                                                            <h6>{{$category->products->count()}}</h6>
+                                                        </td>
+                                                    </tr>
+                                                    @endforeach
+                                                </tbody>
+                                            </table>
+                                            
                                             
                                         </div>
 
@@ -45,13 +57,15 @@
 
                                             <div class="row">
                                                 @foreach($newProducts as $new)
-                                                <div class="col-md-12 col-sm-6">
+                                                <div class="col-md-12 col-sm-6 paddingTop">
                                                     <div class="row">
                                                         <a href="{{ route('video', $new->id) }}" id="cs23">
-                                                            <div class="col-md-10 text-left">
-                                                                    <img src="{{ asset('assets/img/play.gif') }}" class="img-rounded" height="100">
-                                                                
-                                                                <h5 class="text-left">{{$new->getTranslatedAttribute('name')}}</h5>
+                                                            <div class="col-md-6">
+                                                                <img src="{{ asset('assets/img/play.gif') }}" class="img-rounded" height="80">
+                                                            </div>
+                                                            <div class="col-md-6">
+                                                                <h7 class="text-left">{{substr($new->getTranslatedAttribute('name'),0, 25)}} {{strlen($new->getTranslatedAttribute('name')) > 26 ? '...' : ''}}</h7>
+                                                                <p class="text-left">{{date('Y-m-d',strtotime($new->created_at))}}</p>
                                                             </div>
                                                         </a>
                                                     </div>
@@ -103,7 +117,7 @@
 
                                                     </div>
                                                     @else
-                                                        <img src="{{ asset('assets/img/res/Chele.png') }}" class="img-rounded img-responsive">
+                                                        <img src="{{ asset('assets/img/play.gif') }}" class="img-rounded img-responsive">
                                                     @endif
                                                 </div>
 
@@ -114,11 +128,10 @@
                                             <div class="col-md-12" id="cs16">
                                                 <h5> {!! $product->getTranslatedAttribute('text')!!}</h5>
                                             </div>
-                                            <div class="col-md-12 text-right" id="cs14">
-                                                <button class="btn btn-white" data-toggle="modal" data-target="#myModal2" id="cs17">@lang('продукты.заказать')<i class="material-icons animated infinite fadeIn" id="cs18">shopping_cart</i></button>
-                                            </div>
+                                            
                                         </div>
                                         <div class="row">
+                                            @if($relatedProducts->count() > 0)
                                             <div class="col-md-12">
                                                 <h3 class="title text-left">@lang('видео.похожие')</h3>
                                             </div>
@@ -134,6 +147,7 @@
                                                    @endforeach
                                                 </div>
                                             </div>
+                                            @endif
                                         </div>
                                     </div>
                                 </div>
@@ -142,7 +156,7 @@
                     </div>
                 </div>
             </div>
-            @include('footer.main')
+            @include('footer.main2')
         </div>
     </div>
 

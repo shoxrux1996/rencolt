@@ -167,10 +167,14 @@ class AdminProductController extends Controller
 	        }
 
 	        $images = json_decode($category->images);
+                
+            if($images != null || $images != ""){
+                $images = json_encode(array_merge($images,$filesPath));
+            }else{
+                $images = json_encode($filesPath);
+            }
             
-	        $images = json_encode(array_merge($images,$filesPath));
-		
-        	$category->images = $images;
+            $category->images = $images;
         }
 
         $category->save();

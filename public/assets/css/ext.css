@@ -1,3 +1,9 @@
+.paddingTop{
+        padding-top: 10px;
+    }
+ .paddingTop p{
+ 	font-size: 11px;
+ }
 #cs1{
 	color: black!important;
 }

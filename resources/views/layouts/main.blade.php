@@ -43,6 +43,24 @@
         </div>
     </div>
 
+
+    <div class="modal fade" id="telegramModal" tabindex="-1" role="dialog" aria-labelledby="telegramModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                    <h4 class="modal-title" id="myModalLabel">@lang('главная.подробнее')</h4>
+                </div>
+                <div class="modal-body">
+                    {{Session::get('message')}}
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-info btn-simple" data-dismiss="modal">@lang('главная.спасибо')</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
 </body>
 <!--   Core JS Files   -->
 <script src="{{ asset('assets/js/jquery.min.js') }}" type="text/javascript"></script>
@@ -111,6 +129,11 @@
     $('#plate-default').plate();
     $('#plate-default2').plate();
 </script>
+@if(Session::has('message'))
+<script type="text/javascript">
+    $('#telegramModal').modal('show');
+</script>
+@endif
 @yield('scripts')
 
 </html>

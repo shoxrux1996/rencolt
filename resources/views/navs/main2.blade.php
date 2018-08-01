@@ -12,7 +12,7 @@
             <div class="logo-container text-center">
                 <div class="logo">
                     <img src="{{asset('assets/img/res/logo2.png')}}" height="90" alt="RENCOLT" rel="tooltip"
-                         title="@lang('онас.текст_фото')"
+                         title="<b>RENCOLT</b> was Designed & Coded with care by the staff from <b>IUTLab</b>"
                          data-placement="bottom" data-html="true">
                 </div>
             </div>

@@ -6,7 +6,7 @@
             <form class="contact-form">
                 <div class="row">
                     @foreach($categories as $category)
-                    <a href="#" id="cs23">
+                    <a href="{{ route('category', $category->slug) }}" id="cs23">
                         <div class="col-md-12">
                             <div class="form-group label-floating">
                                 <label class="control-label" id="cs11">{{$category->getTranslatedAttribute('name')}}</label>

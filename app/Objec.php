@@ -4,8 +4,9 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 
-class Object extends Model
+class Objec extends Model
 {
+    protected $table = 'objecs';
     protected $fillable = [
         'name_ru', 'name_uz', 'name_en',
         'text_ru', 'text_uz', 'text_en',

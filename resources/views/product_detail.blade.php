@@ -33,11 +33,20 @@
                                         <div class="col-md-12 ">
                                             <h3 class="title">@lang('продукты.категории')</h3>
                                             <input type="hidden" name="category" id="category">
-
-                                            @foreach($categories as $category )
-                                            <a href="#" onclick="formSubmit('{{$category->name_ru}}')" id="cs23"><h6 class="description">{{$category->getTranslatedAttribute('name')}} &ensp; &ensp; &ensp;&ensp;&ensp;&ensp;&ensp; {{$category->products->count()}}</h6></a>
-                                            @endforeach
-                                            
+                                            <table class="table">
+                                                <tbody>
+                                                    @foreach($categories as $category )
+                                                    <tr>
+                                                        <td>
+                                                            <a href="#" onclick="formSubmit('{{$category->name_ru}}')" id="cs23"><h6 class="description">{{$category->getTranslatedAttribute('name')}} </h6></a>
+                                                        </td>
+                                                        <td>
+                                                            <h6>{{$category->products->count()}}</h6>
+                                                        </td>
+                                                    </tr>
+                                                    @endforeach
+                                                </tbody>
+                                            </table>
                                         </div>
 
                                         <div class="col-md-12">
@@ -45,16 +54,19 @@
 
                                             <div class="row">
                                                 @foreach($newProducts as $new)
-                                                <div class="col-md-12 col-sm-6">
+                                                <div class="col-md-12 col-sm-6 paddingTop">
                                                     <div class="row">
                                                         <a href="{{ route('product', $new->id) }}" id="cs23">
-                                                            <div class="col-md-10 text-left">
+                                                            <div class="col-md-7">
                                                                 @if(json_decode($new->images) != null)
                                                                     <img src="{{ asset('storage/'.json_decode($new->images)[0]) }}" class="img-rounded" height="100">
                                                                 @else
                                                                     <img src="{{ asset('assets/img/res/Chele.png') }}" class="img-rounded" height="100">
                                                                 @endif
-                                                                <h5 class="text-left">{{$new->getTranslatedAttribute('name')}}</h5>
+                                                            </div>
+                                                            <div class="col-md-5">
+                                                                <h7 class="text-left">{{substr($new->getTranslatedAttribute('name'),0, 25)}} {{strlen($new->getTranslatedAttribute('name')) > 26 ? '...' : ''}}</h7>
+                                                                <p class="text-left">{{date('Y-m-d',strtotime($new->created_at))}}</p>
                                                             </div>
                                                         </a>
                                                     </div>
@@ -105,10 +117,12 @@
                                             </div>
                                         </div>
                                         <div class="row">
+                                            @if($relatedProducts->count() > 0)
                                             <div class="col-md-12">
                                                 <h3 class="title text-left">@lang('продукты.похожие')</h3>
                                             </div>
                                             <div class="col-md-12 ">
+                                                
                                                 <div class="row">
                                                     @foreach($relatedProducts as $related)
                                                     <a href="{{ route('product', $related->id) }}" id="cs23">
@@ -123,7 +137,9 @@
                                                     </a>
                                                    @endforeach
                                                 </div>
+                                               
                                             </div>
+                                             @endif
                                         </div>
                                     </div>
                                 </div>
@@ -132,12 +148,16 @@
                     </div>
                 </div>
             </div>
-            @include('footer.main')
+            @include('footer.main2')
         </div>
     </div>
 
     <!-- Modal Core -->
     <div class="modal fade" id="myModal2" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+        <form action="{{ route('telegram') }}" method="post">
+        @csrf
+        <input type="hidden" name="id" value="{{$product->id}}">
+        <input type="hidden" name="class" value="{{get_class($product)}}">
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
@@ -152,29 +172,30 @@
                             <span class="input-group-addon">
                                             <i class="material-icons">account_box</i>
                                         </span>
-                            <input type="text" class="form-control" placeholder="@lang('продукты.имя')">
+                            <input type="text" class="form-control" name="name" placeholder="@lang('продукты.имя')" required>
                         </div>
                         <div class="input-group">
                             <span class="input-group-addon">
                                             <i class="material-icons" id="cs8">phone</i>
                                         </span>
-                            <input type="text" class="form-control" placeholder="@lang('продукты.номер')">
+                            <input type="text" class="form-control" name="phone" placeholder="@lang('продукты.номер')" required>
                         </div>
                         <div class="input-group">
                             <span class="input-group-addon">
                                             <i class="material-icons" id="cs10">message</i>
                                         </span>
-                            <input type="text" value="" placeholder="@lang('продукты.текст')" class="form-control" />
+                            <input type="text" value="" name="text" placeholder="@lang('продукты.текст')" class="form-control" required/>
                         </div>
                     </div>
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-danger" data-dismiss="modal" id="cs26">@lang('продукты.закрыть')</button>
-                    <button type="button" class="btn btn-info" id="cs26">@lang('продукты.отправить')</button>
+                    <button type="submit" class="btn btn-info" id="cs26">@lang('продукты.отправить')</button>
                 </div>
                 <hr>
             </div>
         </div>
+    </form>
     </div>
     @include('footer.footer')
 @endsection

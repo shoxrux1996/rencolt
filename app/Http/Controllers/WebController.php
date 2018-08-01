@@ -5,14 +5,26 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Product;
 use App\Category;
-use App\Object;
+use App\Objec as Object;
 use App\Video;
-
+use App\Message;
+use Illuminate\Support\Facades\Validator;
+use App\Notifications\OrderNotification;
 class WebController extends Controller
 {
     public function index(){
+        $products = Product::orderByDesc('created_at')->take(3)->get();
+        $objects = Object::orderByDesc('created_at')->take(3)->get();
+        $videos = Video::orderByDesc('created_at')->take(3)->get();
+        $products = collect($products);
+        $objects = collect($objects);
+        $videos = collect($videos);
+        $products = $products->merge($objects);
+        $products = $products->merge($videos);
+        $products = $products->shuffle(); 
 
-    	return view('index')->withProducts(Product::orderByDesc('created_at')->take(8)->get())
+
+    	return view('index')->withProducts($products)
     	->withCategories(Category::all());
     }
     public function products(){
@@ -22,7 +34,7 @@ class WebController extends Controller
         $product = Product::findOrFail($id);
         $products = Product::whereHas('categories', function($query) use($product){
             $query->whereIn('id', $product->categories->pluck('id'));
-        });
+        })->where('id','!=', $id);
         
         return view('product_detail')->withCategories(Category::all())->withNewProducts(Product::orderByDesc('created_at')->take(4)->get())->withProduct($product)
         ->withRelatedProducts($products->take(4)->get());
@@ -67,7 +79,7 @@ class WebController extends Controller
         $product = Object::findOrFail($id);
         $products = Object::whereHas('categories', function($query) use($product){
             $query->whereIn('id', $product->categories->pluck('id'));
-        });
+        })->where('id','!=', $id);
         
         return view('object_detail')->withCategories(Category::all())->withNewProducts(Object::orderByDesc('created_at')->take(4)->get())->withProduct($product)
         ->withRelatedProducts($products->take(4)->get());
@@ -112,7 +124,7 @@ class WebController extends Controller
         $product = Video::findOrFail($id);
         $products = Video::whereHas('categories', function($query) use($product){
             $query->whereIn('id', $product->categories->pluck('id'));
-        });
+        })->where('id','!=', $id);
         
         return view('video_detail')->withCategories(Category::all())->withNewProducts(Video::orderByDesc('created_at')->take(4)->get())->withProduct($product)
         ->withRelatedProducts($products->take(4)->get());
@@ -215,8 +227,45 @@ class WebController extends Controller
         $objects = $objects->paginate(12,['*'],'objects');
         $videos = $videos->paginate(12,['*'],'videos');
 
-        return view('all')->withProducts($products)->withObjects($objects)->withVideos($videos);
+        return view('all')->withProducts($products)->withObjects($objects)->withVideos($videos)->withCategories(Category::all());
     }
-    
+    public function category($slug){
+
+        return view('category')->withCategories(Category::all())->withProduct(Category::where('slug', $slug)->first());
+    }
+    public function aboutus(){
+        return view('aboutus')->withCategories(Category::all());
+    }
+    public function partners(){
+        return view('partners')->withCategories(Category::all());
+    }
+
+    public function telegram(Request $request){
+        
+        $validator = Validator::make($request->all(),[
+            'name'=>'required',
+            'phone' => 'required',
+            'text' => 'required'
+        ]);
+        $product = null;
+        if($validator->fails()){
+             return redirect()->back()
+                        ->withErrors($validator, 'telegram')
+                        ->withInput();
+        }
+        if($request->class != null && $request->id != null){
+            if($request->class == 'App\Object'){
+                $product= Object::findOrFail($request->id);
+            }else{
+                $product= Product::findOrFail($request->id);
+            }
+        }
+        $message = new Message($request->all());
+        $message->notify( new OrderNotification($product));
+        $message->save();
+
+       return redirect()->back()->with('message','Ваше сообщение успешно отправлено. Наши менеджеры свяжутся с вами в ближайшее время.'); 
+        
+    }
 
 }
