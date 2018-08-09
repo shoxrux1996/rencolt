@@ -1,131 +1,127 @@
 @extends('layouts.main')
-@section('styles')
-<link rel="stylesheet" type="text/css" href="{{ asset('assets/css/ext2.css') }}">
-@endsection
 @section('title')
-   Объекты
+Uzbekistan
+@endsection
+@section('styles')
+<link href="https://fonts.googleapis.com/css?family=Headland+One" rel="stylesheet">
 @endsection
 @section('content')
-    @include('navs.main', ['style' => true])
-    <div class="wrapper" id="cs2">
-        <div class="main main-raised">
-            <div class="container">
-                <div class="section  section-landing container">
-                    <div class="row">
-                        <div class="col-md-12" id="cs22">
-                            <div class="row">
-                                <form action="{{ route('objects.search') }}" method="get" id="productsForm">
-                                <div class="col-md-3">
-                                    <h3 class="title text-left">@lang('объекты.искать_объекты')</h3>
-                                    <div class="row">
-                                        <div class="col-md-12 form-group label-floating has-success">
-
-                                            <label class="control-label text-left">@lang('объекты.поиск')</label>
-                                            <input type="text" class="form-control" name="search" />
-                                            <span class="form-control-feedback">
-                                        <i class="material-icons animated infinite swing">search</i>
-                                        </span>
-
-                                        </div>
-
-                                        <div class="col-md-12 ">
-                                            <h3 class="title">@lang('объекты.категории')</h3>
-                                            <input type="hidden" name="category" id="category">
-
-                                            <table class="table">
-                                                <tbody>
-                                                    @foreach($categories as $category )
-                                                    <tr>
-                                                        <td>
-                                                            <a href="#" onclick="formSubmit('{{$category->name_ru}}')" id="cs23"><h6 class="description">{{$category->getTranslatedAttribute('name')}} </h6></a>
-                                                        </td>
-                                                        <td>
-                                                            <h6>{{$category->products->count()}}</h6>
-                                                        </td>
-                                                    </tr>
-                                                    @endforeach
-                                                </tbody>
-                                            </table>
-                                            
-                                        </div>
-
-                                        <div class="col-md-12">
-                                            <h3 class="title text-left" id="cs14">@lang('объекты.новинки')</h3>
-
-                                            <div class="row">
-                                                @foreach($newProducts as $product)
-                                                <div class="col-md-12 col-sm-6 paddingTop">
-                                                    <div class="row">
-                                                        <a href="{{ route('object', $product->id) }}" id="cs23">
-                                                            <div class="col-md-7 col-sm-12">
-                                                                @if(json_decode($product->images) != null)
-                                                                    <img src="{{ asset('storage/'.json_decode($product->images)[0]) }}" class="img-rounded" height="100">
-                                                                @else
-                                                                    <img src="{{ asset('assets/img/res/Chele.png') }}" class="img-rounded" height="100" >
-                                                                @endif
-                                                                
-                                                            </div>
-                                                             <div class="col-md-5 col-sm-12">
-                                                               <h7 class="text-left">{{substr($product->getTranslatedAttribute('name'),0, 25)}} {{strlen($product->getTranslatedAttribute('name')) > 26 ? '...' : ''}}</h7>
-                                                                <p class="text-left">{{date('Y-m-d',strtotime($product->created_at))}}</p>
-                                                            </div>
-                                                        </a>
-                                                    </div>
-                                                </div>
-                                                @endforeach
-                                                
-                                            </div>
-                                        </div>
+    @include('navs.main', ['class' => "warning-color"])
+    <!--Main layout-->
+    <main id="cs7">
+        <div class="container z-depth-7 example" id="cs10">
+            <h2 class="h1-responsive font-weight-bold text-center" id="cs8"><span class="badge red darken-4" style="font-family: 'Headland One', serif; border-radius: 40px">@lang('главная.объекты') <i class="fa fa-list"></i></span></h2>
+            <!--Section: Main info-->
+            <section class="mt-5 wow zoomIn">
+                <!--Grid row-->
+                <div class="row">
+                    <!--Grid column-->
+                    @foreach($products as $product)
+                    <div class="col-md-3 col-sm-6 mb-4" data-toggle="tooltip" data-placement="top" title="Нажмитье чтобы просмотреть подробнее">
+                        <div class=" wider ">
+                            <!-- Card image -->
+                            <div class="view view-cascade  overlay ">
+                                @if(json_decode($product->images) != null)
+                                    <img class="img-fluid rounded-circle img-thumbnail" src="{{asset('storage/'.$product->image_crop(json_decode($product->images)[0]))}}" alt="Card image cap">
+                                @else
+                                    <img class="img-fluid rounded-circle img-thumbnail" src="{{asset('assets/img/res/travertin.jpg')}}" alt="Card image cap">
+                                @endif
+                                <a href="{{route('object', $product->id)}}">
+                                    <div class="mask flex-center ">
+                                        <p class="white-text">
+                                            <h1 class="white-text">{{$product->getTranslatedAttribute('name')}}</h1></p>
                                     </div>
-                                </div>
-                                </form>
-                                <div class="col-md-9" >
-                                    <div class="row">
-                                        <div class="col-md-12">
-                                            <h3 class="title text-left">@lang('объекты.объекты')</h3>
-                                        </div>
-                                        <div class="col-md-12">
-
-                                            <div class="row">
-                                                @foreach($products as $product)
-                                                <div class="col-md-3">
-                                                    <a href="{{ route('object', $product->id) }}" id="cs23">
-                                                        <div class="container2" id="cs25">
-                                                             @if(json_decode($product->images) != null)
-                                                                    <img src="{{ asset('storage/'.json_decode($product->images)[0]) }}" alt="Avatar" class="image" id="cs24">
-                                                                @else
-                                                                    <img src="{{ asset('assets/img/res/Chele.png') }}" alt="Avatar" class="image" id="cs24">
-                                                            @endif
-                                                            <div class="middle">
-                                                                <div class="text"><i class="fa fa-eye" aria-hidden="true"></i></div>
-                                                            </div>
-                                                            <h5 class="title text-center">{{$product->getTranslatedAttribute('name')}}</h5>
-                                                        </div>
-                                                    </a>
-                                                </div>
-                                                @endforeach
-                                            </div>
-                                        </div>
-                                        <div class="col-md-12 text-center">
-                                            {!! $products->links('pagination') !!}
-                                        </div>
-                                    </div>
-                                </div>
+                                </a>
+                            </div>
+                        </div>
+                        <div class="row card-body  text-center">
+                            <div class="col-md-12">
+                                <a href="{{route('object', $product->id)}}"><h4><span class="badge red darken-4 wow pulse infinite">{{$product->getTranslatedAttribute('name')}}</span></h4></a>
                             </div>
                         </div>
                     </div>
+                    @endforeach
+                    {{-- <div class="col-md-3 col-sm-6 mb-4" data-toggle="tooltip" data-placement="top" title="Нажмитье чтобы просмотреть подробнее">
+                        <div class=" wider ">
+                            <!-- Card image -->
+                            <div class="view view-cascade  overlay ">
+                                <img class="img-fluid rounded-circle img-thumbnail" src="img/res/travertin.jpg" alt="Card image cap">
+                                <a href="detail.html">
+                                    <div class="mask flex-center ">
+                                        <p class="white-text">
+                                            <h1 class="white-text">Марка P4-20</h1></p>
+                                    </div>
+                                </a>
+                            </div>
+                        </div>
+                        <div class="row card-body  text-center">
+                            <div class="col-md-12">
+                                <a href="detail.html"><h4><span class="badge red darken-4 wow pulse infinite">Марка P4-20</span></h4></a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-3 col-sm-6 mb-4" data-toggle="tooltip" data-placement="top" title="Нажмитье чтобы просмотреть подробнее">
+                        <div class=" wider ">
+                            <!-- Card image -->
+                            <div class="view view-cascade  overlay ">
+                                <img class="img-fluid rounded-circle img-thumbnail" src="img/res/travertin.jpg" alt="Card image cap">
+                                <a href="detail.html">
+                                    <div class="mask flex-center ">
+                                        <p class="white-text">
+                                            <h1 class="white-text">Марка P4-20</h1></p>
+                                    </div>
+                                </a>
+                            </div>
+                        </div>
+                        <div class="row card-body  text-center">
+                            <div class="col-md-12">
+                                <a href="detail.html"><h4><span class="badge red darken-4 wow pulse infinite">Марка P4-20</span></h4></a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-3 col-sm-6 mb-4" data-toggle="tooltip" data-placement="top" title="Нажмитье чтобы просмотреть подробнее">
+                        <div class=" wider ">
+                            <!-- Card image -->
+                            <div class="view view-cascade  overlay ">
+                                <img class="img-fluid rounded-circle img-thumbnail" src="img/res/travertin.jpg" alt="Card image cap">
+                                <a href="detail.html">
+                                    <div class="mask flex-center ">
+                                        <p class="white-text">
+                                            <h1 class="white-text">Марка P4-20</h1></p>
+                                    </div>
+                                </a>
+                            </div>
+                        </div>
+                        <div class="row card-body  text-center">
+                            <div class="col-md-12">
+                                <a href="detail.html"><h4><span class="badge red darken-4 wow pulse infinite">Марка P4-20</span></h4></a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-3 col-sm-6 mb-4" data-toggle="tooltip" data-placement="top" title="Нажмитье чтобы просмотреть подробнее">
+                        <div class=" wider ">
+                            <!-- Card image -->
+                            <div class="view view-cascade  overlay ">
+                                <img class="img-fluid rounded-circle img-thumbnail" src="img/res/travertin.jpg" alt="Card image cap">
+                                <a href="detail.html">
+                                    <div class="mask flex-center ">
+                                        <p class="white-text">
+                                            <h1 class="white-text">Марка P4-20</h1></p>
+                                    </div>
+                                </a>
+                            </div>
+                        </div>
+                        <div class="row card-body  text-center">
+                            <div class="col-md-12">
+                                <a href="detail.html"><h4><span class="badge red darken-4 wow pulse infinite">Марка P4-20</span></h4></a>
+                            </div>
+                        </div>
+                    </div> --}}
                 </div>
-            </div>
-            @include('footer.main2')
+                <!--Grid row-->
+            </section>
         </div>
-    </div>
-    @include('footer.footer')
+    </main>
+    <!--Main layout-->
 @endsection
-@section('scripts')
-<script type="text/javascript">
-    function formSubmit(name){
-        $('#category').val(name);
-        $('#productsForm').submit();
-    }
-</script>
-@endsection
+

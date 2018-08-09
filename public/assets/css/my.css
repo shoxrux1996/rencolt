@@ -1,0 +1,43 @@
+@media (min-width: 800px) and (max-width: 850px) {
+        .navbar:not(.top-nav-collapse) {
+            background: #1C2331!important;
+        }
+    }
+#cs1 {
+	background-image: url(../img/res/footer-bg.jpg);
+	background-size: cover;
+}
+#cs2 {
+	background-image: url('../img/res/slider1a.jpg');
+	background-repeat: no-repeat; background-size: cover;
+}
+#cs3 {
+	animation-delay: .5s;
+}
+#cs4 {
+	animation-delay: 1.5s;
+	border-radius: 40px;
+}
+#cs5 {
+	background-image: url('../img/res/slider2.jpg');
+	background-repeat: no-repeat;
+	background-size: cover;
+}
+#cs6 {
+	background-image: url('../img/res/slider3.jpg'); background-repeat: no-repeat; background-size: cover;
+}
+#cs7 {
+	background-image: url(../img/res/travertinebg.jpg);
+}
+#cs8 {
+	padding-top: 60px;
+}
+#cs9 {
+	background-image: url(../img/res/footer-bg.jpg)
+}
+#cs10 {
+ 	padding-top: 6rem !important;
+}
+#cs7{
+    min-height: 95%;
+}

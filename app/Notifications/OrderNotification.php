@@ -21,7 +21,7 @@ class OrderNotification extends Notification
      */
      public function __construct($request = null)
     {
-        $this->request = $request;   
+        $this->request = $request;
     }
 
 
@@ -56,7 +56,7 @@ class OrderNotification extends Notification
         return TelegramMessage::create()
             ->to(45177248)
             ->content("*Заказ*\n *Имя:* ".$message->name.
-                "\n *Почта:* ".$message->phone.
+                "\n *Телефон:* ".$message->phone.
                 "\n *Текст:* ".$message->text.($this->request != null ?  "\n *Продукт:* ".$this->request->name_ru : ''));
     }
     /**

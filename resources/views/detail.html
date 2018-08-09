@@ -1,387 +1,460 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
 
 <head>
-    <meta charset="utf-8" />
-    <link rel="apple-touch-icon" sizes="76x76" href="assets/img/apple-icon.png">
-    <link rel="icon" type="image/png" href="assets/img/apple-icon.png">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
-    <title>RENCOLT - Главная</title>
-    <meta content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0' name='viewport' />
-    <!--     Fonts and icons     -->
-    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons" />
-    <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700" />
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/latest/css/font-awesome.min.css" />
-    <!-- CSS Files -->
-    <link href="assets/css/bootstrap.min.css" rel="stylesheet" />
-    <link href="assets/css/material-kit.css" rel="stylesheet" />
-    <link rel="stylesheet" type="text/css" href="assets/css/animate.css">
-    <link rel="stylesheet" type="text/css" href="assets/css/slick.css" />
-    <link rel="stylesheet" type="text/css" href="assets/css/ext.css" />
-    <link rel="stylesheet" type="text/css" href="assets/css/hover.css">
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <title>Rencolt - Uzbekistan</title>
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+    <!-- Bootstrap core CSS -->
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+    <!-- Material Design Bootstrap -->
+    <link href="css/mdb.min.css" rel="stylesheet">
+    <!-- Your custom styles (optional) -->
+    <link href="css/style.min.css" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="css/my.css">
+    <link href="https://fonts.googleapis.com/css?family=Headland+One" rel="stylesheet">
+    <style>
+        @media (min-width: 68px) {
+            .carousel-multi-item-2 .col-md-3 {
+                float: left;
+                width: 25%;
+                max-width: 100%;
+            }
+        }
+
+        .carousel-multi-item-2 .card img {
+            border-radius: 4px;
+        }
+    </style>
 </head>
 
-<body class="landing-page">
-    <nav class="navbar navbar-white navbar-warning navbar-absolute">
+<body>
+    <!-- Navbar -->
+    <nav class="navbar fixed-top navbar-expand-lg navbar-dark warning-color scrolling-navbar">
         <div class="container">
-            <!-- Brand and toggle get grouped for better mobile display -->
-            <div class="navbar-header">
-                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navigation-example">
-                    <span class="sr-only">Toggle navigation</span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                </button>
-                <div class="logo-container text-center">
-                    <div class="logo">
-                        <img src="assets/img/res/logo2.png" height="90" alt="RENCOLT" rel="tooltip" title="<b>RENCOLT</b> was Designed & Coded with care by the staff from <b>IUTLab</b>" data-placement="bottom" data-html="true">
-                    </div>
-                </div>
-            </div>
-            <div class="collapse navbar-collapse" id="navigation-example">
-                <ul class="nav navbar-nav navbar-right">
-                    <li>
-                        <div class="col-md-3 dropdown">
-                            <a href="components-documentation.html" target="_blank" id="cs1" class="btn btn-simple  dropdown-toggle" data-toggle="dropdown">
-                            ГЛАВНАЯ
-                            
+            <!-- Brand -->
+            <a class="navbar-brand" href="index.html">
+                <img src="img/res/logo2.png" height="70" alt="Not Found!">
+
+            </a>
+            <!-- Collapse -->
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
+                aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <!-- Links -->
+            <div class="collapse navbar-collapse font-weight-bold" style="font-size: 16px" id="navbarSupportedContent">
+                <!-- Left -->
+                <ul class="navbar-nav mr-auto">
+                    <li class="nav-item ">
+                        <a class="nav-link" href="list.html">Травертин
+                            <span class="sr-only">(current)</span>
                         </a>
-                            
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="list.html">Клей ПВА</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="list.html">Грунтовка</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="list.html">Эмульсия</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="list.html">Отточенто краска</a>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Дополнительно</a>
+                        <div class="dropdown-menu dropdown-primary" aria-labelledby="navbarDropdownMenuLink">
+                            <a class="dropdown-item" href="partners.html">Партнеры</a>
+                            <a class="dropdown-item" href="contacts.html">Контакты</a>
                         </div>
                     </li>
-                    <li>
-                        <div class="col-md-3 dropdown">
-                            <a href="#" id="cs1" class="btn btn-simple  dropdown-toggle" data-toggle="dropdown">
-                            КАТАЛОГ
-                                <b class="caret"></b>
-                                </a>
-                            <ul class="dropdown-menu dropdown-menu-right">
-                                <li><a href="product_list.html">ПРОДУКТЫ</a></li>
-                                <li><a href="product_list.html">ОБЪЕКТЫ</a></li>
-                                <li><a href="video.html">ВИДЕО</a></li>
-                            </ul>
-                        </div>
-                    </li>
-                    <li>
-                        <div class="col-md-3 dropdown">
-                            <a href="components-documentation.html" id="cs1" class="btn btn-simple  dropdown-toggle" data-toggle="dropdown">
-                            ИНФОРМАЦИЯ
-                             <b class="caret"></b>
-                              </a>
-                             <ul class="dropdown-menu dropdown-menu-right">
-                                <li><a href="product_list.html">ТРАВЕРТИН</a></li>
-                                <li><a href="product_list.html">ЭМУЛЬСИЯ</a></li>
-                                <li><a href="product_list.html">ОТТОЧЕНТО КРАСКА</a></li>
-                            </ul>
-                            
-                       
-                        </div>
-                    </li>
-                    <li>
-                        <div class="col-md-3">
-                            <a href="partners.html" id="cs1" class="btn btn-simple">
-                            ПАРТНЕРЫ
-                            
-                        </a>
-                        </div>
-                    </li>
-                    <li>
-                        <div class="col-md-3 dropdown">
-                            <a href="about.html" id="cs1" class="btn btn-simple">
-                            О НАС
-                            
-                        </a>
-                        </div>
-                    </li>
-                    <li>
-                        <div class="col-md-3 dropdown">
-                            <a href="components-documentation.html"  id="cs1" class="btn btn-simple">
-                            РУС
-                            <b class="caret"></b>
-                        </a>
-                            <ul class="dropdown-menu dropdown-menu-right">
-                                <li><a href="#">UZB</a></li>
-                                <li><a href="#">ENG</a></li>
-                            </ul>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Язык</a>
+                        <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                            <a class="dropdown-item" href="#">ENG</a>
+                            <a class="dropdown-item" href="#">UZB</a>
                         </div>
                     </li>
                 </ul>
-                <div class="row">
-                    <div class="col-md-6"></div>
-                    <div class="col-md-6 navbar-right">
-                        <ul class="nav navbar-nav navbar-right" id="cs2">
-                            <li id="cs12">
-                                <a href="components-documentation.html" target="_blank" id="cs1" class="btn btn-simple  dropdown-toggle" data-toggle="dropdown">
-                            <i class="material-icons fadeIn animated infinite">phone</i>&ensp;+998 97 777 44 14  &emsp; +998 77 441 44 55
-                            
+                <!-- Right -->
+                <ul class="navbar-nav nav-flex-icons">
+                    <li class="nav-item">
+                        <a href="#!" class="nav-link border border-light rounded">
+                            <i class="black-text animated jackInTheBox infinite fa fa-phone mr-2"></i>+998 97 774 44 77
                         </a>
-                            </li>
-                            <li>
-                                <div class="form-group label-floating has-success">
-                                    <label class="control-label">Поиск</label>
-                                    <input type="text" class="form-control" />
-                                    <span class="form-control-feedback">
-                                    <i class="material-icons animated infinite swing">search</i>
-                                </span>
-                                </div>
-                            </li>
-                        </ul>
-                    </div>
-                </div>
+                    </li>
+                </ul>
             </div>
         </div>
     </nav>
-    
-    <div class="wrapper" id="cs2">
-        <div class="header header-filter" id="cs3">
-            <div class="container">
-                <div class="row">
-                    <div class="col-md-6"></div>
-                    <div class="col-md-6 animated bounceInUp">
-                        <h1 class="title" id="cs1">Справтесь с ремонтом фасадов.</h1>
-                        <h4 id="cs1">Новая грунтовка Новая грунтовка Новая грунтовка Новая грунтовка Новая грунтовка Новая грунтовка Новая грунтовка Новая грунтовка Новая грунтовка.</h4>
-                        <br />
-                        <div>
-                            <a href="#" class="btn btn-white btn-raised btn-lg btn-round" data-toggle="modal" data-target="#myModal" style="color: black">
-                            <i class="material-icons">subject</i> ПОДРОБНЕЕ
-                        </a></div>
+    <!-- Navbar -->
+    <!--Main layout-->
+    <main id="cs7">
+        <!-- Section: Magazine v.2 -->
+        <section class="card container magazine-section elegant-color">
+            <!-- Section heading -->
+            <h2 class="h1-responsive font-weight-bold text-center my-5" style="padding-top: 100px">
+                <span class="badge red darken-4">ТРАВЕРТИН</span>
+            </h2>
+            <!-- Section description -->
+            <!-- Grid row -->
+            <div class="row">
+                <!-- Grid column -->
+                <div class="col-lg-6 col-md-6">
+                    <!-- Featured news -->
+                    <div class="single-news mb-lg-0 mb-4">
+                        <!-- Image -->
+                        <div class="view overlay rounded z-depth-1-half mb-4">
+                            <img class="img-fluid" src="img/res/travertin.jpg" style="width: 100%" alt="Sample image">
+                            <a>
+                                <div class="mask rgba-white-slight"></div>
+                            </a>
+                        </div>
+                        <!-- Data -->
+                        <div class="news-data d-flex justify-content-between">
+                            <a href="#!" class="deep-orange-text">
+                                <h6 class="font-weight-bold">
+                                    <i class="fa fa-cutlery pr-2"></i>Травертин</h6>
+                            </a>
+                            <p class="font-weight-bold white-text">
+                                <i class="fa fa-clock-o pr-2"></i>27/02/2018</p>
+                        </div>
+                        <!--Carousel Wrapper-->
+                        <div id="multi-item-example" class="carousel slide carousel-multi-item carousel-multi-item-2" data-ride="carousel">
+                            <!--Controls-->
+                            <div class="controls-top text-center">
+                                <a class="black-text" href="#multi-item-example" data-slide="prev">
+                                    <i class="fa fa-angle-left fa-3x pr-3"></i>
+                                </a>
+                                <a class="black-text" href="#multi-item-example" data-slide="next">
+                                    <i class="fa fa-angle-right fa-3x pl-3"></i>
+                                </a>
+                            </div>
+                            <!--/.Controls-->
+                            <!--Slides-->
+                            <div class="carousel-inner" role="listbox">
+                                <!--First slide-->
+                                <div class="carousel-item active">
+                                    <div class="col-md-3 mb-3">
+                                        <a href="https://mdbootstrap.com/img/Photos/Horizontal/Nature/4-col/img%20(53).jpg">
+                                            <div class="card">
+                                                <img class="img-fluid" src="https://mdbootstrap.com/img/Photos/Horizontal/Nature/4-col/img%20(53).jpg" alt="Card image cap">
+                                            </div>
+                                        </a>
+                                    </div>
+                                    <div class="col-md-3 mb-3">
+                                        <a href="https://mdbootstrap.com/img/Photos/Horizontal/Nature/4-col/img%20(25).jpg">
+                                            <div class="card">
+                                                <img class="img-fluid" src="https://mdbootstrap.com/img/Photos/Horizontal/Nature/4-col/img%20(25).jpg" alt="Card image cap">
+                                            </div>
+                                        </a>
+                                    </div>
+                                    <div class="col-md-3 mb-3">
+                                        <a href="https://mdbootstrap.com/img/Photos/Horizontal/Nature/4-col/img%20(47).jpg">
+                                            <div class="card">
+                                                <img class="img-fluid" src="https://mdbootstrap.com/img/Photos/Horizontal/Nature/4-col/img%20(47).jpg" alt="Card image cap">
+                                            </div>
+                                        </a>
+                                    </div>
+                                    <div class="col-md-3 mb-3">
+                                        <a href="https://mdbootstrap.com/img/Photos/Horizontal/Nature/4-col/img%20(26).jpg">
+                                            <div class="card">
+                                                <img class="img-fluid" src="https://mdbootstrap.com/img/Photos/Horizontal/Nature/4-col/img%20(26).jpg" alt="Card image cap">
+                                            </div>
+                                        </a>
+                                    </div>
+                                </div>
+                                <!--/.First slide-->
+                                <!--Second slide-->
+                                <div class="carousel-item">
+                                    <div class="col-md-3 mb-3">
+                                        <a href="https://mdbootstrap.com/img/Photos/Horizontal/Nature/4-col/img%20(53).jpg">
+                                            <div class="card">
+                                                <img class="img-fluid" src="https://mdbootstrap.com/img/Photos/Horizontal/Nature/4-col/img%20(53).jpg" alt="Card image cap">
+                                            </div>
+                                        </a>
+                                    </div>
+                                    <div class="col-md-3 mb-3">
+                                        <a href="https://mdbootstrap.com/img/Photos/Horizontal/Nature/4-col/img%20(25).jpg">
+                                            <div class="card">
+                                                <img class="img-fluid" src="https://mdbootstrap.com/img/Photos/Horizontal/Nature/4-col/img%20(25).jpg" alt="Card image cap">
+                                            </div>
+                                        </a>
+                                    </div>
+                                    <div class="col-md-3 mb-3">
+                                        <a href="https://mdbootstrap.com/img/Photos/Horizontal/Nature/4-col/img%20(47).jpg">
+                                            <div class="card">
+                                                <img class="img-fluid" src="https://mdbootstrap.com/img/Photos/Horizontal/Nature/4-col/img%20(47).jpg" alt="Card image cap">
+                                            </div>
+                                        </a>
+                                    </div>
+                                    <div class="col-md-3 mb-3">
+                                        <a href="https://mdbootstrap.com/img/Photos/Horizontal/Nature/4-col/img%20(26).jpg">
+                                            <div class="card">
+                                                <img class="img-fluid" src="https://mdbootstrap.com/img/Photos/Horizontal/Nature/4-col/img%20(26).jpg" alt="Card image cap">
+                                            </div>
+                                        </a>
+                                    </div>
+                                </div>
+                                <!--/.Second slide-->
+                            </div>
+                            <!--/.Slides-->
+                        </div>
+                        <!--/.Carousel Wrapper-->
+                        <table class="table table-hover white-text mb-4 mt-2">
+                            <thead>
+                                <tr>
+                                    <th scope="col">Номер</th>
+                                    <th scope="col">Код</th>
+                                    <th scope="col">Цвет</th>
+                                    <th scope="col">микрон (мм)</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <th scope="row">1</th>
+                                    <td>P4-20</td>
+                                    <td>Красный</td>
+                                    <td>22.33</td>
+                                </tr>
+                                <tr>
+                                    <th scope="row">2</th>
+                                    <td>P4-22</td>
+                                    <td>черный</td>
+                                    <td>@12.20</td>
+                                </tr>
+                                <tr>
+                                    <th scope="row">3</th>
+                                    <td>В1-3</td>
+                                    <td>черный</td>
+                                    <td>@2.24</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <!-- Featured news -->
+                </div>
+                <div class="col-lg-6 col-md-6">
+                    <!-- Excerpt -->
+                    <h3 class="font-weight-bold white-text mb-3">
+                        <a>Описание</a>
+                    </h3>
+                    <p class="white-text mb-lg-0 mb-md-5 mb-4 bq-warning blockquote"> Траверти́н (от итал. travertino, лат. lapis tiburtinus — тибурский камень) — известковый туф, поликристаллическая
+                        хрупкая тонкозернистая гомогенная горная порода, образованная минералами карбоната кальция (в основном
+                        арагонит с меньшей долей кальцита), известковые отложения углекислых источников. Поддаётся шлифованию
+                        и полированию. В I веке до н. э. травертин был известен под именем lapis tiburtinus (камень из Тибура).</p>
+                    <blockquote class="blockquote text-right">
+                        <footer class="blockquote-footer mb-3">Source:
+                            <cite data-toggle="tooltip" data-placement="top" title="www.wikipedia.org">Wikipedia</cite>
+                        </footer>
+                    </blockquote>
+                    <div class="col-md-12 col-lg-12">
+                        <h3 class="font-weight-bold white-text mb-3">
+                            <a>Вы можетье</a>
+                        </h3>
+                        <button class="btn btn-primary btn-block" data-toggle="modal" data-target="#modalPoll">
+                            <i class="fa fa-paper-plane ml-1"></i> Связывать с нами</button>
+                        <button class="btn btn-success mt-3 mb-3 btn-block" data-toggle="modal" data-target="#sideModalTR">
+                            <i class="fa fa-magic mr-1"></i> Узнать наш адресс и номер</button>
                     </div>
                 </div>
+                <!-- Grid column -->
+                <!-- Grid column -->
+                <div class="col-lg-12 col-md-12">
+                    <div class="row text-left">
+                        <div class="col-md-6 col-lg-6 pb-3">
+                            <h3 class="font-weight-bold white-text mb-3">
+                                <a>Другие марки</a>
+                            </h3>
+                            <div class="row container">
+                                <!-- Grid column -->
+                                <div class="col-md-4 pt-3 col-sm-4">
+                                    <!--Image-->
+                                    <div class="view overlay rounded z-depth-1">
+                                        <img class="img-fluid" src="https://mdbootstrap.com/img/Photos/Others/img%20(29).jpg" alt="Sample image">
+                                        <a>
+                                            <div class="mask rgba-white-slight"></div>
+                                        </a>
+                                    </div>
+                                </div>
+                                <div class="col-md-4 pt-3 col-sm-4">
+                                    <!--Image-->
+                                    <div class="view overlay rounded z-depth-1">
+                                        <img class="img-fluid" src="https://mdbootstrap.com/img/Photos/Others/img%20(29).jpg" alt="Sample image">
+                                        <a>
+                                            <div class="mask rgba-white-slight"></div>
+                                        </a>
+                                    </div>
+                                </div>
+                                <div class="col-md-4 pt-3 col-sm-4">
+                                    <!--Image-->
+                                    <div class="view overlay rounded z-depth-1">
+                                        <img class="img-fluid" src="https://mdbootstrap.com/img/Photos/Others/img%20(29).jpg" alt="Sample image">
+                                        <a>
+                                            <div class="mask rgba-white-slight"></div>
+                                        </a>
+                                    </div>
+                                </div>
+                                <div class="col-md-4 pt-3 col-sm-4">
+                                    <!--Image-->
+                                    <div class="view overlay rounded z-depth-1">
+                                        <img class="img-fluid" src="https://mdbootstrap.com/img/Photos/Others/img%20(29).jpg" alt="Sample image">
+                                        <a>
+                                            <div class="mask rgba-white-slight"></div>
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!--Grid column-->
+                <!-- Modal: modalPoll -->
+                <div class="modal fade right" id="modalPoll" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true"
+                    data-backdrop="false">
+                    <div class="modal-dialog modal-full-height modal-right modal-notify modal-primary" role="document">
+                        <div class="modal-content">
+                            <!--Header-->
+                            <div class="modal-header">
+                                <p class="heading lead">Отправить сообшение
+                                </p>
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                    <span aria-hidden="true" class="white-text">×</span>
+                                </button>
+                            </div>
+                            <!--Body-->
+                            <div class="modal-body">
+                                <div class="text-center">
+                                    <i class="fa fa-paper-plane fa-4x mb-3 animated wobble"></i>
+                                    <p>
+                                        <strong>Телеграм</strong>
+                                    </p>
+                                    <p>Вы точьно хотитье заказать?
+                                        <strong></strong>Мы всегда ответьим на ваш вопрос!</strong>
+                                    </p>
+                                </div>
+                                <hr>
+                                <!-- Radio -->
+                                <p class="text-center">
+                                    <strong>Заполнитье</strong>
+                                </p>
+                                <!-- Radio -->
+                                <p class="text-center">
+                                    <strong>эту форму и напишитье ваш действителтный номер</strong>
+                                </p>
+                                <div class="md-form mt-3">
+                                    <input type="text" id="materialContactFormName" class="form-control">
+                                    <label for="materialContactFormName">Имя</label>
+                                </div>
+                                <div class="md-form mt-3">
+                                    <input type="text" id="materialContactFormNumber" class="form-control">
+                                    <label for="materialContactFormNumber">Номер</label>
+                                </div>
+                                <!--Basic textarea-->
+                                <div class="md-form">
+                                    <textarea type="text" id="form79textarea" class="md-textarea form-control" rows="3"></textarea>
+                                    <label for="form79textarea">Сообшение</label>
+                                </div>
+                            </div>
+                            <!--Footer-->
+                            <div class="modal-footer justify-content-center">
+                                <button type="button" class="btn btn-md btn-primary" style="border-radius: 40px">Отправить
+                                    <i class="fa fa-paper-plane ml-1 white-text"></i>
+                                </button>
+                                <button type="button" class="btn btn-md btn-red darken-4 waves-effect" data-dismiss="modal" style="border-radius: 40px">Закрыть</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- Modal: modalPoll -->
+                <!-- Side Modal Top Right -->
+                <!-- To change the direction of the modal animation change .right class -->
+                <div class="modal fade right" id="sideModalTR" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+                    <!-- Add class .modal-side and then add class .modal-top-right (or other classes from list above) to set a position to the modal -->
+                    <div class="modal-dialog modal-side modal-top-left" role="document">
+                        <div class="modal-content">
+                            <div class="modal-header orange lighten-1 black-text">
+                                <h4 class="modal-title w-100" id="myModalLabel">Наш Адресс и Номер</h4>
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                            </div>
+                            <div class="modal-body">
+                                <div class="text-center">
+                                    <i class="fa fa-location-arrow fa-4x mb-3 animated wobble"></i>
+                                    <p>
+                                        <strong>Локация</strong>
+                                    </p>
+                                    <p>
+                                        <strong>Это форма являет
+                                        </strong>наша визитная карточка!
+                                    </p>
+                                    <p>
+                                        <strong>Адресс:
+                                        </strong>Узбекистан, Ташкент, Мирзо Улугбекский район.
+                                    </p>
+                                    <p>
+                                        <strong>Номер:
+                                        </strong>+998 99 888 77 44
+                                    </p>
+                                    <p>
+                                        <strong>Время работы:
+                                        </strong>9.00 - 18.00
+                                    </p>
+                                </div>
+                            </div>
+                            <div class="modal-footer">
+                                <a href="contacts.html">
+                                    <button type="button" class="btn black btn-md" style="border-radius: 20px">Подробнее</button>
+                                </a>
+                                <button type="button" class="btn btn-warning btn-md" data-dismiss="modal" style="border-radius: 20px">Закрыть</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- Side Modal Top Right -->
             </div>
+            <!-- Grid row -->
+        </section>
+        <!-- Section: Magazine v.2 -->
+    </main>
+    <!--Main layout-->
+    <!--Footer-->
+    <footer class="page-footer text-center font-small wow fadeIn">
+        <!--Copyright-->
+        <div class="footer-copyright py-3 warning-color font-weight-bold black-text">
+            © 2018 Copyright RENKOLT UZBEKISTAN
+            <a href="#!" data-toggle="tooltip" data-placement="top" title="Students of INHA University in Tashkent. www.inha.uz"> by IUTLAB</a>
         </div>
-        <div class="main main-raised">
-            <div class="container">
-                <div class="row section">
-                    <h2 class="title text-center">НОВИНКИ <i class="material-icons animated infinite flash" id="cs4">fiber_new</i></h2>
-                    <div class="slider demo col-md-12" id="cs5">
-                        <div class="col-md-4 ">
-                            <div class="team">
-                                <div class="team-player btn-tooltip hvr-curl-top-right">
-                                    <img src="assets/img/res/Chele.png" alt="Thumbnail Image" class="img-raised img-rounded" width="250" height="200">
-                                    <h4 class="title">ГРУНТОВКА <br />
-         <a href="product_detail.html"><small class="text-muted btn btn-info btn-simple btn-sm">Смотреть <i class="material-icons">visibility</i></small></a>
-        </h4>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-md-4">
-                            <div class="team">
-                                <div class="team-player btn-tooltip hvr-curl-top-right">
-                                    <img src="assets/img/res/Chele.png" alt="Thumbnail Image" class="img-raised  img-rounded " width="250" height="200">
-                                    <h4 class="title">ГРУНТОВКА <br />
-         <a href="product_detail.html"><small class="text-muted btn btn-info btn-simple btn-sm">Смотреть <i class="material-icons">visibility</i></small></a>
-        </h4>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-md-4">
-                            <div class="team">
-                                <div class="team-player btn-tooltip hvr-curl-top-right">
-                                    <img src="assets/img/res/Chele.png" alt="Thumbnail Image" class="img-raised img-rounded" width="250" height="200">
-                                    <h4 class="title">ГРУНТОВКА <br />
-         <a href="product_detail.html"><small class="text-muted btn btn-info btn-simple btn-sm">Смотреть <i class="material-icons">visibility</i></small></a>
-        </h4>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-md-4">
-                            <div class="team">
-                                <div class="team-player btn-tooltip hvr-curl-top-right">
-                                    <img src="assets/img/res/Chele.png" alt="Thumbnail Image" class="img-raised img-rounded" width="250" height="200">
-                                    <h4 class="title">ГРУНТОВКА <br />
-         <a href="product_detail.html"><small class="text-muted btn btn-info btn-simple btn-sm">Смотреть <i class="material-icons">visibility</i></small></a>
-        </h4>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-md-4">
-                            <div class="team">
-                                <div class="team-player btn-tooltip hvr-curl-top-right">
-                                    <img src="assets/img/res/Chele.png" alt="Thumbnail Image" class="img-raised img-rounded" width="250" height="200">
-                                    <h4 class="title">ГРУНТОВКА <br />
-         <a href="product_detail.html"><small class="text-muted btn btn-info btn-simple btn-sm">Смотреть <i class="material-icons">visibility</i></small></a>
-        </h4>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="section text-center section-landing container" id="cs28" >
-                    <div class="row container">
-                        <div class="col-md-12">
-                            <h2 class="title">О КОМПАНИИ <i class="material-icons" id="cs6">help</i></h2>
-                            <div class="row">
-                                <div class="col-md-6" id="plate-default2">
-                                    <img src="assets/img/res/Chele.png" class="img-rounded img-responsive img-raised">
-                                </div>
-                                <div class="col-md-6">
-                                    <h5 class="description" id="cs1">Успешно соединяя эстетику и функциональность, фактурный материал Traverta открывает неограниченные возможности для дизайнерских экспер.</h5>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="section landing-section" id="cs7">
-                <div class="row container">
-                    <div class="col-md-4 col-md-offset-2">
-                        <h2 class="text-left title" id="cs11">КАТЕГОРИИ</h2>
-                        <h4 class="text-left description" id="cs11">Вы можете выбрать категории из нижнего списка</h4>
-                        <form class="contact-form">
-                            <div class="row">
-                                <div class="col-md-12">
-                                    <div class="form-group label-floating">
-                                        <label class="control-label" id="cs11">КАТЕГОРИИ</label>
-                                    </div>
-                                </div>
-                                <div class="col-md-12">
-                                    <div class="form-group label-floating">
-                                        <label class="control-label" id="cs11">КАТЕГОРИИ</label>
-                                    </div>
-                                </div>
-                                <div class="col-md-12">
-                                    <div class="form-group label-floating">
-                                        <label class="control-label" id="cs11">КАТЕГОРИИ</label>
-                                    </div>
-                                </div>
-                                <div class="col-md-12">
-                                    <div class="form-group label-floating">
-                                        <label class="control-label" id="cs11">КАТЕГОРИИ</label>
-                                    </div>
-                                </div>
-                                <div class="col-md-12">
-                                    <div class="form-group label-floating">
-                                        <label class="control-label" id="cs11">КАТЕГОРИИ</label>
-                                    </div>
-                                </div>
-                            </div>
-                        </form>
-                    </div>
-                    <div class="col-md-4">
-                        <h2 class="text-left title" id="cs11">КОНТАКТЫ</h2>
-                        <div class="card card-signup card-raised" id="plate-default">
-                            <form class="form" method="" action="">
-                                <div class="content">
-                                    <div class="input-group">
-                                        <span class="input-group-addon">
-                                            <i class="material-icons" id="cs8">phone</i>
-                                        </span>
-                                        <input type="text" class="form-control" placeholder="+998 97 444 55 56" disabled>
-                                    </div>
-                                    <div class="input-group">
-                                        <span class="input-group-addon">
-                                            <i class="material-icons" id="cs9">email</i>
-                                        </span>
-                                        <input type="text" class="form-control" placeholder="rencol.uz@gmail.com" disabled>
-                                    </div>
-                                    <div class="input-group">
-                                        <span class="input-group-addon">
-                                            <i class="material-icons" id="cs4">location_on</i>
-                                        </span>
-                                        <input type="password" placeholder="Uzbekistan, Tashkent, M.Ulugbek district" class="form-control" disabled />
-                                    </div>
-                                </div>
-                                <div class="footer text-center">
-                                    <a class="btn btn-simple btn-warning btn-lg">НАША ВИЗИТКА</a>
-                                </div>
-                            </form>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <footer class="footer">
-            <div class="container">
-                <div class="copyright pull-right"><b>
-                    &copy; Авторские права 2018 IUTLab. Все права защищены</b> <i class="fa fa-check-circle" id="cs10" aria-hidden="true"></i>
-                </div>
-            </div>
-        </footer>
-    
-    <!-- Modal Core -->
-    <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-                    <h4 class="modal-title" id="myModalLabel">ПОДРОБНЕЕ</h4>
-                </div>
-                <div class="modal-body">
-                    Far far away, behind the word mountains, far from the countries Vokalia and Consonantia, there live the blind texts. Separated they live in Bookmarksgrove right at the coast of the Semantics, a large language ocean. A small river named Duden flows by their place and supplies it with the necessary regelialia. It is a paradisematic country, in which roasted parts of sentences fly into your mouth. Even the all-powerful Pointing has no control about the blind texts it is an almost unorthographic life One day however a small line of blind text by the name of Lorem Ipsum decided to leave for the far World of Grammar.
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-info btn-simple" data-dismiss="modal">Спасибо</button>
-                </div>
-            </div>
-        </div>
-    </div>
+        <!--/.Copyright-->
+    </footer>
+    <!--/.Footer-->
+    <!-- SCRIPTS -->
+    <!-- JQuery -->
+    <script type="text/javascript" src="js/jquery-3.3.1.js"></script>
+    <!-- Bootstrap tooltips -->
+    <script type="text/javascript" src="js/popper.min.js"></script>
+    <!-- Bootstrap core JavaScript -->
+    <script type="text/javascript" src="js/bootstrap.min.js"></script>
+    <!-- MDB core JavaScript -->
+    <script type="text/javascript" src="js/mdb.min.js"></script>
+    <!-- Initializations -->
+    <script type="text/javascript">
+        // Animations initialization
+        new WOW().init();
+
+        $(function () {
+            $('[data-toggle="tooltip"]').tooltip()
+        });
+        $("#alert-target").click(function () {
+            toastr["info"]("I was launched via jQuery!")
+        });
+    </script>
 </body>
-<!--   Core JS Files   -->
-<script src="assets/js/jquery.min.js" type="text/javascript"></script>
-<script src="assets/js/bootstrap.min.js" type="text/javascript"></script>
-<script src="assets/js/material.min.js"></script>
-<!--  Plugin for the Sliders, full documentation here: http://refreshless.com/nouislider/ -->
-<script src="assets/js/nouislider.min.js" type="text/javascript"></script>
-<!--  Plugin for the Datepicker, full documentation here: http://www.eyecon.ro/bootstrap-datepicker/ -->
-<script src="assets/js/bootstrap-datepicker.js" type="text/javascript"></script>
-<!-- Control Center for Material Kit: activating the ripples, parallax effects, scripts from the example pages etc -->
-<script src="assets/js/material-kit.js" type="text/javascript"></script>
-<script type="text/javascript" src="assets/js/slick.js"></script>
-<script type="text/javascript" src="assets/js/jquery.plate.js"></script>
-<script>
-$(document).ready(function() {
-    $('.demo').slick({
-        infinite: true,
-        slidesToShow: 4,
-        slidesToScroll: 1,
-        // prev arrow
-
-        prevArrow: false,
-
-        nextArrow: false,
-
-
-        // Enables auto play of slides
-
-        autoplay: true,
-
-        autoplaySpeed: 2000,
-
-        responsive: [
-    {
-      breakpoint: 1024,
-      settings: {
-        slidesToShow: 3,
-        slidesToScroll: 3,
-        infinite: true,
-        dots: true
-      }
-    },
-    {
-      breakpoint: 600,
-      settings: {
-        slidesToShow: 2,
-        slidesToScroll: 2
-      }
-    },
-    {
-      breakpoint: 480,
-      settings: {
-        slidesToShow: 1,
-        slidesToScroll: 1
-      }
-    }
-    // You can unslick at a given breakpoint now by adding:
-    // settings: "unslick"
-    // instead of a settings object
-  ],
-
-
-    });
-});
-
-$('#plate-default').plate();
-$('#plate-default2').plate();
-</script>
 
 </html>

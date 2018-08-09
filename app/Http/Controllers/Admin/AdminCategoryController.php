@@ -46,7 +46,7 @@ class AdminCategoryController extends Controller
             	$filename = Str::random(20);
 			}
             $image = Image::make($file)->resize(
-                900,
+                800,
                 600
             )->encode($file->getClientOriginalExtension(), 100);
 
@@ -57,29 +57,29 @@ class AdminCategoryController extends Controller
             } else {
                 Storage::disk('public')->put($fullPath, (string) $image, 'public');
             }
-            /*Thumbnail image*/
-             	// $scale = intval($thumbnails->scale) / 100;
-                $image = Image::make($file)->resize(
-                    300,
-                    200,
-                    function (Constraint $constraint) {
-                        $constraint->aspectRatio();
-                        $constraint->upsize();
-                    }
-                )->encode($file->getClientOriginalExtension(), 75);
-            // } elseif (isset($options->thumbnails) && isset($thumbnails->crop->width) && isset($thumbnails->crop->height)) {
-            //     $crop_width = $thumbnails->crop->width;
-            //     $crop_height = $thumbnails->crop->height;
-            //     $image = Image::make($file)
-            //         ->fit($crop_width, $crop_height)
-            //         ->encode($file->getClientOriginalExtension(), 75);
-            // }
-            Storage::disk('public')->put(
-                $path.$filename.'-'.'small'.'.'.$file->getClientOriginalExtension(),
-                (string) $image,
-                'public'
-            );
-               
+            // /*Thumbnail image*/
+            //  	// $scale = intval($thumbnails->scale) / 100;
+            //     $image = Image::make($file)->resize(
+            //         400,
+            //         300,
+            //         function (Constraint $constraint) {
+            //             $constraint->aspectRatio();
+            //             $constraint->upsize();
+            //         }
+            //     )->encode($file->getClientOriginalExtension(), 75);
+            // // } elseif (isset($options->thumbnails) && isset($thumbnails->crop->width) && isset($thumbnails->crop->height)) {
+            // //     $crop_width = $thumbnails->crop->width;
+            // //     $crop_height = $thumbnails->crop->height;
+            // //     $image = Image::make($file)
+            // //         ->fit($crop_width, $crop_height)
+            // //         ->encode($file->getClientOriginalExtension(), 75);
+            // // }
+            // Storage::disk('public')->put(
+            //     $path.$filename.'-'.'small'.'.'.$file->getClientOriginalExtension(),
+            //     (string) $image,
+            //     'public'
+            // );
+
 
         	$category->image = $fullPath;
         }
@@ -120,7 +120,7 @@ class AdminCategoryController extends Controller
                 $filename = Str::random(20);
             }
             $image = Image::make($file)->resize(
-                900,
+                800,
                 600
             )->encode($file->getClientOriginalExtension(), 100);
 
@@ -131,28 +131,28 @@ class AdminCategoryController extends Controller
             } else {
                 Storage::disk('public')->put($fullPath, (string) $image, 'public');
             }
-            /*Thumbnail image*/
-                // $scale = intval($thumbnails->scale) / 100;
-                $image = Image::make($file)->resize(
-                    300,
-                    200,
-                    function (Constraint $constraint) {
-                        $constraint->aspectRatio();
-                        $constraint->upsize();
-                    }
-                )->encode($file->getClientOriginalExtension(), 75);
-            // } elseif (isset($options->thumbnails) && isset($thumbnails->crop->width) && isset($thumbnails->crop->height)) {
-            //     $crop_width = $thumbnails->crop->width;
-            //     $crop_height = $thumbnails->crop->height;
-            //     $image = Image::make($file)
-            //         ->fit($crop_width, $crop_height)
-            //         ->encode($file->getClientOriginalExtension(), 75);
-            // }
-            Storage::disk('public')->put(
-                $path.$filename.'-'.'small'.'.'.$file->getClientOriginalExtension(),
-                (string) $image,
-                'public'
-            );
+            // /*Thumbnail image*/
+            //     // $scale = intval($thumbnails->scale) / 100;
+            //     $image = Image::make($file)->resize(
+            //         300,
+            //         200,
+            //         function (Constraint $constraint) {
+            //             $constraint->aspectRatio();
+            //             $constraint->upsize();
+            //         }
+            //     )->encode($file->getClientOriginalExtension(), 75);
+            // // } elseif (isset($options->thumbnails) && isset($thumbnails->crop->width) && isset($thumbnails->crop->height)) {
+            // //     $crop_width = $thumbnails->crop->width;
+            // //     $crop_height = $thumbnails->crop->height;
+            // //     $image = Image::make($file)
+            // //         ->fit($crop_width, $crop_height)
+            // //         ->encode($file->getClientOriginalExtension(), 75);
+            // // }
+            // Storage::disk('public')->put(
+            //     $path.$filename.'-'.'small'.'.'.$file->getClientOriginalExtension(),
+            //     (string) $image,
+            //     'public'
+            // );
 
             $this->deleteFileIfExists($category->image);
             $category->image = $fullPath;
@@ -219,6 +219,6 @@ class AdminCategoryController extends Controller
             }
         }
 
-        
+
     }
 }

@@ -1,74 +1,227 @@
 @extends('layouts.main')
 @section('title')
-    Главная
+Uzbekistan
 @endsection
 @section('content')
-    @include('navs.main', ['style' => false])
-    <div class="wrapper" id="cs2">
-        <div class="header header-filter" id="cs3">
-            <div class="container">
+    @include('navs.main', ['class' => "transparent"])
+    @include('navs.carousel')
+    <!--Main layout-->
+    <main id="cs7">
+        <div class="container z-depth-7 example">
+            <h2 class="h1-responsive font-weight-bold text-center" id="cs8">
+                <span class="badge red darken-4">@lang('главная.продукты')
+                    <i class="fa fa-check"></i>
+                </span>
+            </h2>
+            <!--Section: Main info-->
+            <section class="mt-5 wow zoomIn">
+                <!--Grid row-->
                 <div class="row">
-                    <div class="col-md-6"></div>
-                    <div class="col-md-6 animated bounceInUp">
-                        <h1 class="title" id="cs1">@lang('главная.заглавие')</h1>
-                        <h4 id="cs1">@lang('главная.текст')</h4>
-                        <br />
-                        <div>
-                            <a href="#" class="btn btn-white btn-raised btn-lg btn-round" data-toggle="modal" data-target="#myModal" style="color: black">
-                                <i class="material-icons">subject</i>@lang('главная.подробнее')
-                            </a></div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="main main-raised">
-            <div class="container">
-                <div class="row section">
-                    <h2 class="title text-center">@lang('главная.новинки') <i class="material-icons animated infinite flash" id="cs4">fiber_new</i></h2>
-                    <div class="slider demo col-md-12" id="cs5">
-                        @foreach($products as $product)
-                        <div class="col-md-4 ">
-                            <div class="team">
-                                <div class="team-player btn-tooltip hvr-curl-top-right">
-                                    <a href="{{get_class($product) == 'App\Video' ? route('video', $product->id) : (get_class($product) == 'App\Objec' ? route('object', $product->id) : route('product', $product->id))}}">
-                                        @if(get_class($product) != 'App\Video')
-                                            @if(json_decode($product->images) != null)
-                                            <img src="{{ asset('storage/'.json_decode($product->images)[0]) }}" alt="Thumbnail Image" class="img-raised img-rounded" width="250" height="200">
-                                            @else
-                                            <img src="{{ asset('assets/img/res/Chele.png') }}" alt="Thumbnail Image" class="img-raised img-rounded" width="250" height="200">
-                                            @endif
-                                        @else
-                                            <img src="{{ asset('assets/img/play.gif') }}" alt="Thumbnail Image" class="img-raised img-rounded" width="250" height="200">
-                                        @endif
+                    <!--Grid column-->
+                    @foreach($categories as $category)
+                    <div class="col-md-3 col-sm-6 mb-4" data-toggle="tooltip" data-placement="top" title="@lang('главная.нажмитье')">
+                        <div class="card card-cascade wider hoverable">
+                            <!-- Card image -->
+                            <div class="view view-cascade view-zoom overlay zoom">
+                            <img class="img-fluid" src="{{$category->image != null || $category->image != ''? asset('storage/'.$category->image) : asset('assets/img/res/travertin.jpg')}}" alt="Card image cap">
+                                <a href="{{route('products', $category->name_ru)}}">
+                                    <div class="mask flex-center rgba-blue-light">
+                                        <p class="white-text">{{$category->getTranslatedAttribute('name')}}</p>
+                                    </div>
+                                </a>
+                            </div>
+                            <div class="row card-body">
+                                <div class="col-md-6 col-sm-6">
+                                    <a href="{{route('products', $category->name_ru)}}">
+                                        <span class="badge red">
+                                            <i class="fa fa-youtube-play pr-2" aria-hidden="true"></i>{{$category->getTranslatedAttribute('name')}}</span>
                                     </a>
-                                    <h4 class="title text-center">{{$product->getTranslatedAttribute('name')}} <br />
-                                        <a href="{{get_class($product) == 'App\Video' ? route('video', $product->id) : (get_class($product) == 'App\Objec' ? route('object', $product->id) : route('product', $product->id))}}"><small class="text-muted btn btn-info btn-simple btn-sm">@lang('главная.смотреть') <i class="material-icons">visibility</i></small></a>
-                                    </h4>
+                                </div>
+                                <div class="col-md-6 col-sm-6 text-center">
+                                    <a href="{{route('products', $category->name_ru)}}">
+                                        <span class="badge black">@lang('главная.перейти')
+                                            <i class="fa fa-forward wow infinite slideInRight"></i>
+                                        </span>
+                                    </a>
                                 </div>
                             </div>
                         </div>
-                        @endforeach
-
                     </div>
-                </div>
-                <div class="section text-center section-landing container" id="cs28" >
-                    <div class="row container">
-                        <div class="col-md-12">
-                            <h2 class="title">@lang('главная.о_компании')<i class="material-icons" id="cs6">help</i></h2>
-                            <div class="row">
-                                <div class="col-md-6" id="plate-default2">
-                                    <img src="assets/img/res/Chele.png" class="img-rounded img-responsive img-raised">
+                    @endforeach
+                    {{-- <div class="col-md-3 col-sm-6 mb-4" data-toggle="tooltip" data-placement="top" title="Нажмитье чтобы просмотреть подробнее">
+                        <div class="card card-cascade wider hoverable">
+                            <!-- Card image -->
+                            <div class="view view-cascade view-zoom overlay zoom">
+                                <img class="img-fluid" src="img/res/pva.jpg" alt="Card image cap">
+                                <a href="list.html">
+                                    <div class="mask flex-center rgba-orange-strong">
+                                        <p class="white-text">КЛЕЙ ПВА</p>
+                                    </div>
+                                </a>
+                            </div>
+                            <div class="row card-body">
+                                <div class="col-md-6 col-sm-6">
+                                    <a href="video.html">
+                                        <span class="badge red">
+                                            <i class="fa fa-youtube-play pr-2" aria-hidden="true"></i>КЛЕЙ ПВА</span>
+                                    </a>
                                 </div>
-                                <div class="col-md-6">
-                                    <h5 class="description" id="cs1">@lang('главная.о_компании_текст')</h5>
+                                <div class="col-md-6 col-sm-6 text-center">
+                                    <a href="video.html">
+                                        <span class="badge black">Перейтьи
+                                            <i class="fa fa-forward wow infinite slideInRight"></i>
+                                        </span>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-3 col-sm-6 mb-4" data-toggle="tooltip" data-placement="top" title="Нажмитье чтобы просмотреть подробнее">
+                        <div class="card card-cascade wider hoverable">
+                            <!-- Card image -->
+                            <div class="view view-cascade view-zoom overlay zoom">
+                                <img class="img-fluid" src="img/res/emul.jpg" alt="Card image cap">
+                                <a href="list.html">
+                                    <div class="mask flex-center rgba-blue-strong">
+                                        <p class="white-text">ГРУНТОВКА</p>
+                                    </div>
+                                </a>
+                            </div>
+                            <div class="row card-body">
+                                <div class="col-md-6 col-sm-6">
+                                    <a href="video.html">
+                                        <span class="badge red">
+                                            <i class="fa fa-youtube-play pr-2" aria-hidden="true"></i>ГРУНТОВКА</span>
+                                    </a>
+                                </div>
+                                <div class="col-md-6 col-sm-6 text-center">
+                                    <a href="video.html">
+                                        <span class="badge black">Перейтьи
+                                            <i class="fa fa-forward wow infinite slideInRight"></i>
+                                        </span>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-3 col-sm-6 mb-4" data-toggle="tooltip" data-placement="top" title="Нажмитье чтобы просмотреть подробнее">
+                        <div class="card card-cascade wider hoverable">
+                            <!-- Card image -->
+                            <div class="view view-cascade view-zoom overlay zoom">
+                                <img class="img-fluid" src="img/res/emul.jpg" alt="Card image cap">
+                                <a href="list.html">
+                                    <div class="mask flex-center rgba-orange-strong">
+                                        <p class="white-text">ЭМУЛЬСИЯ</p>
+                                    </div>
+                                </a>
+                            </div>
+                            <div class="row card-body">
+                                <div class="col-md-6 col-sm-6">
+                                    <a href="video.html">
+                                        <span class="badge red">
+                                            <i class="fa fa-youtube-play pr-2" aria-hidden="true"></i>ЭМУЛЬСИЯ</span>
+                                    </a>
+                                </div>
+                                <div class="col-md-6 col-sm-6 text-center">
+                                    <a href="video.html">
+                                        <span class="badge black">Перейтьи
+                                            <i class="fa fa-forward wow infinite slideInRight"></i>
+                                        </span>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-3 col-sm-6 mb-4" data-toggle="tooltip" data-placement="top" title="Нажмитье чтобы просмотреть подробнее">
+                        <div class="card card-cascade wider hoverable">
+                            <!-- Card image -->
+                            <div class="view view-cascade view-zoom overlay zoom">
+                                <img class="img-fluid" src="img/res/otto.jpg" alt="Card image cap">
+                                <a href="list.html">
+                                    <div class="mask flex-center rgba-blue-light">
+                                        <p class="white-text">ОТТОЧЕНТО КРАСКА</p>
+                                    </div>
+                                </a>
+                            </div>
+                            <div class="row card-body">
+                                <div class="col-md-12 col-sm-6">
+                                    <a href="video.html">
+                                        <span class="badge red">
+                                            <i class="fa fa-youtube-play pr-2" aria-hidden="true"></i>ОТТОЧЕНТО КРАСКА</span>
+                                    </a>
+                                </div>
+                                <div class="col-md-12 col-sm-6">
+                                    <a href="video.html">
+                                        <span class="badge black">Перейтьи
+                                            <i class="fa fa-forward wow infinite slideInRight"></i>
+                                        </span>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div> --}}
+                    <div class="col-md-3 col-sm-6 mb-4" data-toggle="tooltip" data-placement="top" title="Нажмитье чтобы просмотреть подробнее">
+                        <div class="card card-cascade wider hoverable">
+                                <!-- Card image -->
+                                <div class="view view-cascade view-zoom overlay zoom">
+                                    <img class="img-fluid" src="{{asset('assets/img/res/otto.jpg')}}" alt="Card image cap">
+                                    <a href="{{route('objects')}}">
+                                        <div class="mask flex-center rgba-blue-light">
+                                            <p class="white-text">@lang('главная.объекты')</p>
+                                        </div>
+                                    </a>
+                                </div>
+                                <div class="row card-body">
+                                    <div class="col-md-6 col-sm-6">
+                                        <a href="{{route('objects')}}">
+                                            <span class="badge red">
+                                                <i class="fa fa-youtube-play pr-2" aria-hidden="true"></i>@lang('главная.объекты')</span>
+                                        </a>
+                                    </div>
+                                    <div class="col-md-6 col-sm-6">
+                                        <a href="{{route('objects')}}">
+                                            <span class="badge black">@lang('главная.перейти')
+                                                <i class="fa fa-forward wow infinite slideInRight"></i>
+                                            </span>
+                                        </a>
+                                    </div>
+                                </div>
+                        </div>
+                    </div>
+
+                    <div class="col-md-3 col-sm-6 mb-4" data-toggle="tooltip" data-placement="top" title="Нажмитье чтобы просмотреть подробнее">
+                        <div class="card card-cascade wider hoverable">
+                            <!-- Card image -->
+                            <div class="view view-cascade view-zoom overlay zoom">
+                                <img class="img-fluid" src="{{asset('assets/img/res/video.jpg')}}" alt="Card image cap">
+                                <a href="{{route('videos')}}">
+                                    <div class="mask flex-center rgba-red-strong">
+                                        <p class="white-text">@lang('главная.видео')</p>
+                                    </div>
+                                </a>
+                            </div>
+                            <div class="row card-body">
+                                <div class="col-md-6 col-sm-6">
+                                    <a href="{{route('videos')}}">
+                                        <span class="badge red">
+                                            <i class="fa fa-youtube-play pr-2" aria-hidden="true"></i>@lang('главная.видео')</span>
+                                    </a>
+                                </div>
+                                <div class="col-md-6 col-sm-6 text-center">
+                                    <a href="{{route('videos')}}">
+                                        <span class="badge black">@lang('главная.перейти')
+                                            <i class="fa fa-forward wow infinite slideInRight"></i>
+                                        </span>
+                                    </a>
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
-            @include('footer.main')
-        </div>
-    </div>
-    @include('footer.footer')
+            <!--Grid row-->
+            </section>
+            </div>
+    </main>
+    <!--Main layout-->
 @endsection

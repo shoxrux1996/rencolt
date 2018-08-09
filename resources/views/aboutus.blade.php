@@ -1,135 +1,114 @@
 @extends('layouts.main')
-@section('styles')
-<link rel="stylesheet" type="text/css" href="{{ asset('assets/css/ext2.css') }}">
-<link rel="stylesheet" href="{{ asset('css/baguetteBox.min.css') }} " />
-<link rel="stylesheet" href="{{ asset('assets/css/cards-gallery.css') }}">
-@endsection
 @section('title')
-    Продукты
+Uzbekistan
 @endsection
 @section('content')
-    @include('navs.main', ['style' => true])
-    <div class="wrapper" id="cs2">
-        <div class="main main-raised">
-            <div class="container">
-                <div class="section  section-landing container">
-                    <div class="row">
-                        <div class="col-md-12" id="cs22">
-                            <div class="detail-info">
+    @include('navs.main', ['class' => "warning-color"])
+        <!--Main layout-->
+        <main id="cs11" class="elegant-color-dark" style="background-image: url('{{asset('assets/cont.jpg')}}'); background-size: cover">
+            <div class="container z-depth-7 example " id="cs10">
+                <h2 class="h1-responsive font-weight-bold text-center" id="cs8"><span class="badge red darken-4" style="font-family: 'Headland One', serif; border-radius: 40px">@lang('главная.контакты')</span></h2>
+                <!--Section: Main info-->
+                <section class="mt-5 wow zoomIn">
+                    <!--Grid row-->
+                    <div class="card">
+                        <!-- Grid row -->
+                        <div class="row">
+                            <!-- Grid column -->
+                            <div class="col-lg-8">
+                                <form action="{{route('telegram')}}" method="post">
+                                    @csrf
+                                    <div class="card-body form">
+                                        <!-- Header -->
+                                        <h3 class="mt-4"><i class="fa fa-envelope pr-2"></i>@lang('главная.свяжитесь')</h3>
+                                        <!-- Grid row -->
+                                        <div class="row">
+                                            <!-- Grid column -->
+                                            <div class="col-md-6">
+                                                <div class="md-form mb-0">
+                                                    <input type="text" name="name" id="form-contact-name" class="form-control" required>
+                                                    <label for="form-contact-name" class="">@lang('главная.имя')</label>
+                                                </div>
+                                            </div>
+                                            <!-- Grid column -->
+                                            <!-- Grid column -->
+                                            <div class="col-md-6">
+                                                <div class="md-form mb-0">
+                                                    <input type="text" id="form-contact-phone" name="phone" class="form-control" required>
+                                                    <label for="form-contact-phone" class="">@lang('главная.номер')</label>
+                                                </div>
+                                            </div>
+                                            <!-- Grid column -->
+                                        </div>
+                                        <!-- Grid row -->
 
-                                <div class="row container">
-                                    <div class="col-md-12 text-center">
-                                        <h2><b>@lang('онас.онас')</b></h2>
+                                        <!-- Grid row -->
+                                        <!-- Grid row -->
+                                        <div class="row">
+                                            <!-- Grid column -->
+                                            <div class="col-md-12">
+                                                <div class="md-form mb-0">
+                                                    <textarea type="text" id="form-contact-message" name="text" class="form-control md-textarea" rows="3" required></textarea>
+                                                    <label for="form-contact-message">@lang('главная.сообшение')</label>
+                                                    <button type="submit" class="btn-floating btn-lg btn-block elegant-color-dark text-center text-white mt-4">
+                                                        <i class="fa fa-send-o pr-2"></i>@lang('главная.отправить')
+                                                    </button>
+                                                </div>
+                                            </div>
+                                            <!-- Grid column -->
+                                        </div>
+                                        <!-- Grid row -->
                                     </div>
-                                    <div class="col-md-12 text-center">
-                                        <img src="assets/img/about.png" id="cs30" class="info-page img-raised" rel="tooltip" title="@lang('онас.текст_фото')" data-placement="top" data-html="true">
-                                    </div>
-
-                                  <div class="col-md-12" id="cs31"> 
-                                <h2 class="title text-center"><b rel="tooltip" data-placement="bottom" data-html="true">@lang('онас.свяжитесь')</b></h2>
-                                @lang('онас.текст')
-                                </div>
-                                <div class="row">
-                                    <div class="col-md-6 text-center" id="cs31">
-                                        <img src="assets/img/res/chele.png" height="200">
-                                    </div>
-                                <div class="col-md-6" id="cs31">
-                                    <h3><b>@lang('онас.контакты')</b></h3>
-                                    <p>
-                                        <div class="form card">
-                                <div class="content">
-                                    <div class="footer text-center">
-                                    <a class="btn btn-warning btn-lg">@lang('онас.визитка')</a>
-                                </div>
-                                    <div class="input-group">
-                                        <span class="input-group-addon">
-                                            <i class="material-icons" id="cs8">phone</i>
-                                        </span>
-                                        <input type="text" class="form-control" placeholder="+998 97 444 55 56" disabled>
-                                    </div>
-                                    <div class="input-group">
-                                        <span class="input-group-addon">
-                                            <i class="material-icons" id="cs9">email</i>
-                                        </span>
-                                        <input type="text" class="form-control" placeholder="rencol.uz@gmail.com" disabled>
-                                    </div>
-                                    <div class="input-group">
-                                        <span class="input-group-addon">
-                                            <i class="material-icons" id="cs4">location_on</i>
-                                        </span>
-                                        <input type="password" placeholder="Uzbekistan, Tashkent, M.Ulugbek district" class="form-control" disabled />
-                                    </div>
-                                </div>
-                                
+                                </form>
                             </div>
-                                    </p>
-                                   
-                                </div>
-                                
-
+                            <!-- Grid column -->
+                            <!-- Grid column -->
+                            <div class="col-lg-4" style="background-color: #ffc947">
+                                <div class="card-body contact text-center h-100">
+                                    <h3 class="my-4"><b>@lang('главная.контакт')</b></h3>
+                                    <ul class="text-lg-left list-unstyled ml-4">
+                                        <li>
+                                            <p><i class="fa fa-map-marker pr-2"></i>{{env('ADDRESS')}}</p>
+                                        </li>
+                                        <li>
+                                            <p><i class="fa fa-phone pr-2"></i>{{env('PHONE')}}</p>
+                                        </li>
+                                        <li>
+                                            <p><i class="fa fa-envelope pr-2"></i>{{env('EMAIL')}}</p>
+                                        </li>
+                                    </ul>
+                                    <hr class="hr-light my-4">
+                                    <ul class="list-inline text-center list-unstyled">
+                                        <li class="list-inline-item">
+                                            <a class="p-2 fa-lg tw-ic">
+                                    <i class="fa fa-twitter"></i>
+                                    </a>
+                                        </li>
+                                        <li class="list-inline-item">
+                                            <a class="p-2 fa-lg li-ic">
+                                    <i class="fa fa-linkedin"> </i>
+                                    </a>
+                                        </li>
+                                        <li class="list-inline-item">
+                                            <a class="p-2 fa-lg ins-ic">
+                                    <i class="fa fa-instagram"> </i>
+                                    </a>
+                                        </li>
+                                    </ul>
+                                    <div class="text-center">
+                                        <img src="{{asset('assets/img/res/cont.png')}}" width="300" height="250">
+                                    </div>
                                 </div>
                             </div>
-                            </div>
+                            <!-- Grid column -->
                         </div>
+                        <!-- Grid row -->
                     </div>
-                </div>
+                    <!--Grid row-->
+                </section>
             </div>
-            @include('footer.main2')
-        </div>
-    </div>
-
-    <!-- Modal Core -->
-    <div class="modal fade" id="myModal2" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-                    <h4 class="modal-title" id="myModalLabel">@lang('продукты.свяжитесь')<i class="fa fa-telegram" style="color: lightblue"></i></h4>
-                </div>
-                <div class="modal-body">
-                    <h5 class="title">@lang('продукты.заполните')</h5>
-                    <img src="{{ asset('assets/img/telegram.png') }}" class="img-rounded img-responsive">
-                    <div class="content">
-                        <div class="input-group">
-                            <span class="input-group-addon">
-                                            <i class="material-icons">account_box</i>
-                                        </span>
-                            <input type="text" class="form-control" placeholder="@lang('продукты.имя')">
-                        </div>
-                        <div class="input-group">
-                            <span class="input-group-addon">
-                                            <i class="material-icons" id="cs8">phone</i>
-                                        </span>
-                            <input type="text" class="form-control" placeholder="@lang('продукты.номер')">
-                        </div>
-                        <div class="input-group">
-                            <span class="input-group-addon">
-                                            <i class="material-icons" id="cs10">message</i>
-                                        </span>
-                            <input type="text" value="" placeholder="@lang('продукты.текст')" class="form-control" />
-                        </div>
-                    </div>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-danger" data-dismiss="modal" id="cs26">@lang('продукты.закрыть')</button>
-                    <button type="button" class="btn btn-info" id="cs26">@lang('продукты.отправить')</button>
-                </div>
-                <hr>
-            </div>
-        </div>
-    </div>
-    @include('footer.footer')
-@endsection
-@section('scripts')
-<script src="{{ asset('js/baguetteBox.min.js') }}"></script>
-<script>
-baguetteBox.run('.cards-gallery', { animation: 'slideIn' });
-</script>
-<script type="text/javascript">
-    function formSubmit(name){
-        $('#category').val(name);
-        $('#productsForm').submit();
-    }
-</script>
+        </main>
+        <!--Main layout-->
 
 @endsection
+

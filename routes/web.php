@@ -12,21 +12,21 @@
 */
 
 Route::get('/', 'WebController@index')->name('index');
-Route::get('products', 'WebController@products')->name('products');
+Route::get('products/{category}', 'WebController@products')->name('products');
 Route::get('product/{id}', 'WebController@product')->name('product');
 Route::get('objects','WebController@objects')->name('objects');
 Route::get('object/{id}', 'WebController@object')->name('object');
 Route::get('videos','WebController@videos')->name('videos');
 Route::get('video/{id}', 'WebController@video')->name('video');
-Route::get('category/{name}', 'WebController@category')->name('category');
-Route::get('aboutus', 'WebController@aboutus')->name('aboutus');
+// Route::get('category/{name}', 'WebController@category')->name('category');
+Route::get('contacts', 'WebController@aboutus')->name('aboutus');
 Route::get('partners', 'WebController@partners')->name('partners');
 Route::post('telegram','WebController@telegram')->name('telegram');
 
-Route::get('products/search', 'WebController@productsSearch')->name('products.search');
-Route::get('objects/search', 'WebController@objectsSearch')->name('objects.search');
-Route::get('videos/search' , 'WebController@videosSearch')->name('videos.search');
-Route::get('all/search','WebController@all')->name('all');
+// Route::get('products/search', 'WebController@productsSearch')->name('products.search');
+// Route::get('objects/search', 'WebController@objectsSearch')->name('objects.search');
+// Route::get('videos/search' , 'WebController@videosSearch')->name('videos.search');
+// Route::get('all/search','WebController@all')->name('all');
 
 Route::prefix('admin')->group(function () {
     // Language
@@ -60,7 +60,7 @@ Route::prefix('admin')->group(function () {
     Route::get('videos', 'Admin\AdminVideoController@index')->name('videos.index');
     Route::post('videos/store', 'Admin\AdminVideoController@store')->name('videos.store');
 
-    
+
     Route::get('/', 'HomeController@index')->name('home');
     Route::any('ajax/categories', 'Admin\AdminCategoryController@browse')->name('categories.browse');
     Route::any('ajax/products', 'Admin\AdminProductController@browse')->name('products.browse');

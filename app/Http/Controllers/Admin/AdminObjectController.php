@@ -41,18 +41,18 @@ class AdminObjectController extends Controller
 			foreach ($files as $key => $file) {
 	            $path = 'objects'.'/'.date('FY').'/';
 	            $filename = Str::random(20);
-	            
+
 	         	while (Storage::disk('public')->exists($path.$filename.'.'.$file->getClientOriginalExtension())) {
 	            	$filename = Str::random(20);
 				}
 	            $image = Image::make($file)->resize(
-	                900,
+	                800,
 	                600
 	            )->encode($file->getClientOriginalExtension(), 100);
 
 
 	            $fullPath = $path.$filename.'.'.$file->getClientOriginalExtension();
-	             
+
 	            if ($this->is_animated_gif($file)) {
 	                Storage::disk('public')->put($fullPath, file_get_contents($file), 'public');
 	                $fullPathStatic = $path.$filename.'-static.'.$file->getClientOriginalExtension();
@@ -65,12 +65,8 @@ class AdminObjectController extends Controller
 	            /*Thumbnail image*/
 	             	// $scale = intval($thumbnails->scale) / 100;
 	                $image = Image::make($file)->resize(
-	                    300,
-	                    200,
-	                    function (Constraint $constraint) {
-	                        $constraint->aspectRatio();
-	                        $constraint->upsize();
-	                    }
+	                    400,
+	                    300
 	                )->encode($file->getClientOriginalExtension(), 75);
 	            // } elseif (isset($options->thumbnails) && isset($thumbnails->crop->width) && isset($thumbnails->crop->height)) {
 	            //     $crop_width = $thumbnails->crop->width;
@@ -87,16 +83,16 @@ class AdminObjectController extends Controller
 	        }
         	$category->images = json_encode($filesPath);
         }
-        
+
     	$category->save();
         $category->categories()->sync($request->categories, false);
 
     	return redirect()->back()->with('message','Объект успешно создан');
     }
     public function update(Request $request, $id = null){
-    	
+
     	$validator = Validator::make($request->all(),[
-            'name_ru'=>'required'  
+            'name_ru'=>'required'
         ]);
         if($validator->fails() || $id == null){
              return redirect()->back()
@@ -119,18 +115,18 @@ class AdminObjectController extends Controller
 			foreach ($files as $key => $file) {
 	            $path = 'objects'.'/'.date('FY').'/';
 	            $filename = Str::random(20);
-	            
+
 	         	while (Storage::disk('public')->exists($path.$filename.'.'.$file->getClientOriginalExtension())) {
 	            	$filename = Str::random(20);
 				}
 	            $image = Image::make($file)->resize(
-	                900,
+	                800,
 	                600
 	            )->encode($file->getClientOriginalExtension(), 100);
 
 
 	            $fullPath = $path.$filename.'.'.$file->getClientOriginalExtension();
-	             
+
 	            if ($this->is_animated_gif($file)) {
 	                Storage::disk('public')->put($fullPath, file_get_contents($file), 'public');
 	                $fullPathStatic = $path.$filename.'-static.'.$file->getClientOriginalExtension();
@@ -143,12 +139,8 @@ class AdminObjectController extends Controller
 	            /*Thumbnail image*/
 	             	// $scale = intval($thumbnails->scale) / 100;
 	                $image = Image::make($file)->resize(
-	                    300,
-	                    200,
-	                    function (Constraint $constraint) {
-	                        $constraint->aspectRatio();
-	                        $constraint->upsize();
-	                    }
+	                    400,
+	                    300
 	                )->encode($file->getClientOriginalExtension(), 75);
 	            // } elseif (isset($options->thumbnails) && isset($thumbnails->crop->width) && isset($thumbnails->crop->height)) {
 	            //     $crop_width = $thumbnails->crop->width;
@@ -165,13 +157,13 @@ class AdminObjectController extends Controller
 	        }
 
 	        $images = json_decode($category->images);
-                
+
             if($images != null || $images != ""){
 	            $images = json_encode(array_merge($images,$filesPath));
             }else{
                 $images = json_encode($filesPath);
             }
-            
+
             $category->images = $images;
         }
 
@@ -184,7 +176,7 @@ class AdminObjectController extends Controller
 
     public function browse(){
     	$categories = Objec::orderByDesc('created_at')->get();
-    	return DataTables::of($categories)->rawColumns(['text_ru','text_uz', 'text_en'])->editColumn('images', function(Object $product){
+    	return DataTables::of($categories)->rawColumns(['text_ru','text_uz', 'text_en'])->editColumn('images', function(Objec $product){
     		return json_decode($product->images);
     	})->make(true);
     }
@@ -233,25 +225,25 @@ class AdminObjectController extends Controller
         return redirect()->back();
     }
     public function deleteImage($id, $image){
-    	
+
 	    	$product = Objec::findOrFail($id);
 	    	// Decode field value
 	        $fieldData = @json_decode($product->images, true);
-	        
+
 	        // // Flip keys and values
 	        // $fieldData = array_flip($fieldData);
-	        
+
 	    	// Remove image from array
 
 	    	$this->deleteFileIfExists($fieldData[$image]);
 	        unset($fieldData[$image]);
-	        
+
 	        // Generate json and update field
 	        $product->images = json_encode(array_values($fieldData));
 
 	        $product->save();
 	        return redirect()->back()->with('message', 'Изображение успешно удалено')->withInput();
-    	
+
     }
      public function edit($id = null)
     {
@@ -272,6 +264,6 @@ class AdminObjectController extends Controller
             }
         }
 
-        
+
     }
 }

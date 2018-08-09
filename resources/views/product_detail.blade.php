@@ -1,214 +1,217 @@
 @extends('layouts.main')
-@section('styles')
-<link rel="stylesheet" type="text/css" href="{{ asset('assets/css/ext2.css') }}">
-<link rel="stylesheet" href="{{ asset('css/baguetteBox.min.css') }} " />
-<link rel="stylesheet" href="{{ asset('assets/css/cards-gallery.css') }}">
-@endsection
 @section('title')
-    Продукты
+Uzbekistan
+@endsection
+@section('styles')
+<link href="https://fonts.googleapis.com/css?family=Headland+One" rel="stylesheet">
+<style>
+        @media (min-width: 68px) {
+            .carousel-multi-item-2 .col-md-3 {
+                float: left;
+                width: 25%;
+                max-width: 100%;
+            }
+        }
+
+        .carousel-multi-item-2 .card img {
+            border-radius: 4px;
+        }
+    </style>
 @endsection
 @section('content')
-    @include('navs.main', ['style' => true])
-    <div class="wrapper" id="cs2">
-        <div class="main main-raised">
-            <div class="container">
-                <div class="section  section-landing container">
-                    <div class="row">
-                        <div class="col-md-12" id="cs22">
-                            <div class="row">
-                                <form action="{{ route('products.search') }}" method="get" id="productsForm">
-                                <div class="col-md-3">
-                                    <h3 class="title text-left">@lang('продукты.искать_продукты')</h3>
-                                    <div class="row">
-                                        <div class="col-md-12 form-group label-floating has-success">
+    @include('navs.main', ['class' => "warning-color"])
+     <!--Main layout-->
+     <main id="cs7">
+        <!-- Section: Magazine v.2 -->
+        <section class="card container magazine-section elegant-color">
+            <!-- Section heading -->
+            <h2 class="h1-responsive font-weight-bold text-center my-5" style="padding-top: 100px">
+                <span class="badge red darken-4">{{$product->getTranslatedAttribute('name')}}</span>
+            </h2>
+            <!-- Section description -->
+            <!-- Grid row -->
+            <div class="row">
+                <!-- Grid column -->
+                <div class="col-lg-6 col-md-6">
+                    <!-- Featured news -->
+                    <div class="single-news mb-lg-0 mb-4">
+                        <!-- Image -->
+                        <div class="view overlay rounded z-depth-1-half mb-4">
+                            @if(json_decode($product->images) != null)
+                            <img class="img-fluid" src="{{asset('storage/'.json_decode($product->images)[0])}}" style="width: 100%" alt="Sample image">
+                            @else
+                            <img class="img-fluid" src="{{asset('assets/img/res/travertin.jpg')}}" style="width: 100%" alt="Sample image">
+                            @endif
+                            <a>
+                                <div class="mask rgba-white-slight"></div>
+                            </a>
+                        </div>
+                        <!-- Data -->
+                        <div class="news-data d-flex justify-content-between">
+                            <a href="#!" class="deep-orange-text">
+                                <h6 class="font-weight-bold">
+                                    <i class="fa fa-cutlery pr-2"></i>{{$product->getTranslatedAttribute('name')}}</h6>
+                            </a>
+                            <p class="font-weight-bold white-text">
+                                <i class="fa fa-clock-o pr-2"></i>{{date('d/m/Y',strtotime($product->created_at))}}</p>
+                        </div>
+                        <!--Carousel Wrapper-->
+                        <div id="multi-item-example" class="carousel slide carousel-multi-item carousel-multi-item-2" data-ride="carousel">
+                            <!--Controls-->
+                            <div class="controls-top text-center">
+                                <a class="black-text" href="#multi-item-example" data-slide="prev">
+                                    <i class="fa fa-angle-left fa-3x pr-3"></i>
+                                </a>
+                                <a class="black-text" href="#multi-item-example" data-slide="next">
+                                    <i class="fa fa-angle-right fa-3x pl-3"></i>
+                                </a>
+                            </div>
+                            <!--/.Controls-->
+                            <!--Slides-->
+                            <div class="carousel-inner" role="listbox">
+                                <!--First slide-->
 
-                                            <label class="control-label text-left">@lang('продукты.поиск')</label>
-                                            <input type="text" class="form-control" name="search" />
-                                            <span class="form-control-feedback">
-                                        <i class="material-icons animated infinite swing">search</i>
-                                        </span>
+                                <div class="carousel-item active">
 
-                                        </div>
-
-                                        <div class="col-md-12 ">
-                                            <h3 class="title">@lang('продукты.категории')</h3>
-                                            <input type="hidden" name="category" id="category">
-                                            <table class="table">
-                                                <tbody>
-                                                    @foreach($categories as $category )
-                                                    <tr>
-                                                        <td>
-                                                            <a href="#" onclick="formSubmit('{{$category->name_ru}}')" id="cs23"><h6 class="description">{{$category->getTranslatedAttribute('name')}} </h6></a>
-                                                        </td>
-                                                        <td>
-                                                            <h6>{{$category->products->count()}}</h6>
-                                                        </td>
-                                                    </tr>
-                                                    @endforeach
-                                                </tbody>
-                                            </table>
-                                        </div>
-
-                                        <div class="col-md-12">
-                                            <h3 class="title text-left" id="cs14">@lang('продукты.новинки')</h3>
-
-                                            <div class="row">
-                                                @foreach($newProducts as $new)
-                                                <div class="col-md-12 col-sm-6 paddingTop">
-                                                    <div class="row">
-                                                        <a href="{{ route('product', $new->id) }}" id="cs23">
-                                                            <div class="col-md-7">
-                                                                @if(json_decode($new->images) != null)
-                                                                    <img src="{{ asset('storage/'.json_decode($new->images)[0]) }}" class="img-rounded" height="100">
-                                                                @else
-                                                                    <img src="{{ asset('assets/img/res/Chele.png') }}" class="img-rounded" height="100">
-                                                                @endif
-                                                            </div>
-                                                            <div class="col-md-5">
-                                                                <h7 class="text-left">{{substr($new->getTranslatedAttribute('name'),0, 25)}} {{strlen($new->getTranslatedAttribute('name')) > 26 ? '...' : ''}}</h7>
-                                                                <p class="text-left">{{date('Y-m-d',strtotime($new->created_at))}}</p>
-                                                            </div>
-                                                        </a>
-                                                    </div>
-                                                </div>
-                                                @endforeach
-                                                
+                                    @foreach(json_decode($product->images) as $image)
+                                    <div class="col-md-3 mb-3">
+                                        <a href="{{asset('storage/'.$image)}}">
+                                            <div class="card">
+                                                <img class="img-fluid" src="{{asset('storage/'.$product->image_crop($image))}}" alt="Card image cap">
                                             </div>
-                                        </div>
+                                        </a>
+                                    </div>
+                                    @endforeach
+                                </div>
+                                <!--/.First slide-->
+                                {{-- <!--Second slide-->
+                                <div class="carousel-item">
+                                    <div class="col-md-3 mb-3">
+                                        <a href="https://mdbootstrap.com/img/Photos/Horizontal/Nature/4-col/img%20(53).jpg">
+                                            <div class="card">
+                                                <img class="img-fluid" src="https://mdbootstrap.com/img/Photos/Horizontal/Nature/4-col/img%20(53).jpg" alt="Card image cap">
+                                            </div>
+                                        </a>
+                                    </div>
+                                    <div class="col-md-3 mb-3">
+                                        <a href="https://mdbootstrap.com/img/Photos/Horizontal/Nature/4-col/img%20(25).jpg">
+                                            <div class="card">
+                                                <img class="img-fluid" src="https://mdbootstrap.com/img/Photos/Horizontal/Nature/4-col/img%20(25).jpg" alt="Card image cap">
+                                            </div>
+                                        </a>
+                                    </div>
+                                    <div class="col-md-3 mb-3">
+                                        <a href="https://mdbootstrap.com/img/Photos/Horizontal/Nature/4-col/img%20(47).jpg">
+                                            <div class="card">
+                                                <img class="img-fluid" src="https://mdbootstrap.com/img/Photos/Horizontal/Nature/4-col/img%20(47).jpg" alt="Card image cap">
+                                            </div>
+                                        </a>
+                                    </div>
+                                    <div class="col-md-3 mb-3">
+                                        <a href="https://mdbootstrap.com/img/Photos/Horizontal/Nature/4-col/img%20(26).jpg">
+                                            <div class="card">
+                                                <img class="img-fluid" src="https://mdbootstrap.com/img/Photos/Horizontal/Nature/4-col/img%20(26).jpg" alt="Card image cap">
+                                            </div>
+                                        </a>
                                     </div>
                                 </div>
-                                </form>
-                                <div class="col-md-9" >
-                                    <div class="row">
-                                        <div class="col-md-12">
-                                            <a href="{{ route('products') }}" id="cs23"><h3 class="title text-left"><i class="material-icons">keyboard_arrow_left</i> @lang('продукты.продукты')</h3></a>
-                                        </div>
-                                        <div class="col-md-6">
-                                            <div class="row">
-                                                <div class="col-md-12">
-                                                    @if(json_decode($product->images) != null)
-                                                        <img src="{{ asset('storage/'.json_decode($product->images)[0]) }}" class="img-rounded img-responsive">
-                                                    @else
-                                                        <img src="{{ asset('assets/img/res/Chele.png') }}" class="img-rounded img-responsive">
-                                                    @endif
-                                                </div>
-                                                <div class="col-md-12" id="cs14">
-                                                    <div id="cs15" class="gallery-block cards-gallery">
-                                                        @if(json_decode($product->images) != null)
-                                                        @foreach(json_decode($product->images) as $image)
-                                                        <div class="card" id="cs27">
-                                                            <a class="" href="{{ asset('storage/'.$image) }}">
-                                                         <img src="{{ asset('storage/'.$image) }}" alt="No Image" width="100" height="100" class="">
-                                                        </a>
-                                                        </div>
-                                                        @endforeach
-                                                        @endif
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="col-md-6 container">
-                                            <h3 class="title text-left"><b>{{$product->getTranslatedAttribute('name')}}</b></h3>
-                                            <div class="col-md-12" id="cs16">
-                                                <h5> {!! $product->getTranslatedAttribute('text')!!}</h5>
-                                            </div>
-                                            <div class="col-md-12 text-right" id="cs14">
-                                                <button class="btn btn-white" data-toggle="modal" data-target="#myModal2" id="cs17">@lang('продукты.заказать')<i class="material-icons animated infinite fadeIn" id="cs18">shopping_cart</i></button>
-                                            </div>
-                                        </div>
-                                        <div class="row">
-                                            @if($relatedProducts->count() > 0)
-                                            <div class="col-md-12">
-                                                <h3 class="title text-left">@lang('продукты.похожие')</h3>
-                                            </div>
-                                            <div class="col-md-12 ">
-                                                
-                                                <div class="row">
-                                                    @foreach($relatedProducts as $related)
-                                                    <a href="{{ route('product', $related->id) }}" id="cs23">
-                                                        <div class="col-md-3 col-sm-6">
-                                                            @if(json_decode($related->images) != null)
-                                                                <img src="{{asset('storage/'.json_decode($related->images)[0])}}" class="img-rounded  img-raised" width="200">
-                                                            @else
-                                                                <img src="{{ asset('assets/img/res/Chele.png') }}" class="img-rounded  img-raised" width="200">
-                                                            @endif
-                                                            <h5 class="title text-left">{{$related->getTranslatedAttribute('name')}}</h5>
-                                                        </div>
-                                                    </a>
-                                                   @endforeach
-                                                </div>
-                                               
-                                            </div>
-                                             @endif
-                                        </div>
+                                <!--/.Second slide--> --}}
+                            </div>
+                            <!--/.Slides-->
+                        </div>
+                        <!--/.Carousel Wrapper-->
+                        {{-- <table class="table table-hover white-text mb-4 mt-2">
+                            <thead>
+                                <tr>
+                                    <th scope="col">Номер</th>
+                                    <th scope="col">Код</th>
+                                    <th scope="col">Цвет</th>
+                                    <th scope="col">микрон (мм)</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <th scope="row">1</th>
+                                    <td>P4-20</td>
+                                    <td>Красный</td>
+                                    <td>22.33</td>
+                                </tr>
+                                <tr>
+                                    <th scope="row">2</th>
+                                    <td>P4-22</td>
+                                    <td>черный</td>
+                                    <td>@12.20</td>
+                                </tr>
+                                <tr>
+                                    <th scope="row">3</th>
+                                    <td>В1-3</td>
+                                    <td>черный</td>
+                                    <td>@2.24</td>
+                                </tr>
+                            </tbody>
+                        </table> --}}
+                    </div>
+                    <!-- Featured news -->
+                </div>
+                <div class="col-lg-6 col-md-6">
+                    <!-- Excerpt -->
+                    <h3 class="font-weight-bold white-text mb-3">
+                        <a>@lang('главная.описание')</a>
+                    </h3>
+                    <div class="white-text mb-lg-0 mb-md-5 mb-4 bq-warning blockquote"> {!! $product->getTranslatedAttribute('text') !!}</div>
+                    {{-- <blockquote class="blockquote text-right">
+                        <footer class="blockquote-footer mb-3">Source:
+                            <cite data-toggle="tooltip" data-placement="top" title="www.wikipedia.org">Wikipedia</cite>
+                        </footer>
+                    </blockquote> --}}
+                    <div class="col-md-12 col-lg-12">
+                        <h3 class="font-weight-bold white-text mb-3">
+                            <a>@lang('главная.вы_можете')</a>
+                        </h3>
+                        <button class="btn btn-primary btn-block" data-toggle="modal" data-target="#modalPoll">
+                            <i class="fa fa-paper-plane ml-1"></i> @lang('главная.свяжитесь')</button>
+                        <button class="btn btn-success mt-3 mb-3 btn-block" data-toggle="modal" data-target="#sideModalTR">
+                            <i class="fa fa-magic mr-1"></i> @lang('главная.узнать_адрес')</button>
+                    </div>
+                </div>
+                <!-- Grid column -->
+                <!-- Grid column -->
+                @if($relatedProducts->count() > 0)
+                <div class="col-lg-12 col-md-12">
+                    <div class="row text-left">
+                        <div class="col-md-6 col-lg-6 pb-3">
+                            <h3 class="font-weight-bold white-text mb-3">
+                                <a>@lang('главная.похожие')</a>
+                            </h3>
+                            <div class="row container">
+                                <!-- Grid column -->
+                                @foreach($relatedProducts as $related)
+                                <div class="col-md-4 pt-3 col-sm-4">
+                                    <!--Image-->
+                                    <div class="view overlay rounded z-depth-1">
+                                    @if(json_decode($related->images) != null)
+                                    <img class="img-fluid" src="{{asset('storage/'.$related->image_crop(json_decode($related->images)[0]))}}" alt="Sample image">
+                                    @else
+                                    <img class="img-fluid" src="{{asset('assets/img/res/travertin.jpg')}}" alt="Sample image">
+                                    @endif
+                                        <a href="{{route('product', $related->id)}}">
+                                            <div class="mask rgba-white-slight"></div>
+                                        </a>
                                     </div>
                                 </div>
+                                @endforeach
                             </div>
                         </div>
                     </div>
                 </div>
-            </div>
-            @include('footer.main2')
-        </div>
-    </div>
+                @endif
+                <!--Grid column-->
 
-    <!-- Modal Core -->
-    <div class="modal fade" id="myModal2" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-        <form action="{{ route('telegram') }}" method="post">
-        @csrf
-        <input type="hidden" name="id" value="{{$product->id}}">
-        <input type="hidden" name="class" value="{{get_class($product)}}">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-                    <h4 class="modal-title" id="myModalLabel">@lang('продукты.свяжитесь')<i class="fa fa-telegram" style="color: lightblue"></i></h4>
-                </div>
-                <div class="modal-body">
-                    <h5 class="title">@lang('продукты.заполните')</h5>
-                    <img src="{{ asset('assets/img/telegram.png') }}" class="img-rounded img-responsive">
-                    <div class="content">
-                        <div class="input-group">
-                            <span class="input-group-addon">
-                                            <i class="material-icons">account_box</i>
-                                        </span>
-                            <input type="text" class="form-control" name="name" placeholder="@lang('продукты.имя')" required>
-                        </div>
-                        <div class="input-group">
-                            <span class="input-group-addon">
-                                            <i class="material-icons" id="cs8">phone</i>
-                                        </span>
-                            <input type="text" class="form-control" name="phone" placeholder="@lang('продукты.номер')" required>
-                        </div>
-                        <div class="input-group">
-                            <span class="input-group-addon">
-                                            <i class="material-icons" id="cs10">message</i>
-                                        </span>
-                            <input type="text" value="" name="text" placeholder="@lang('продукты.текст')" class="form-control" required/>
-                        </div>
-                    </div>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-danger" data-dismiss="modal" id="cs26">@lang('продукты.закрыть')</button>
-                    <button type="submit" class="btn btn-info" id="cs26">@lang('продукты.отправить')</button>
-                </div>
-                <hr>
             </div>
-        </div>
-    </form>
-    </div>
-    @include('footer.footer')
+            <!-- Grid row -->
+        </section>
+        <!-- Section: Magazine v.2 -->
+    </main>
+    <!--Main layout-->
 @endsection
-@section('scripts')
-<script src="{{ asset('js/baguetteBox.min.js') }}"></script>
-<script>
-baguetteBox.run('.cards-gallery', { animation: 'slideIn' });
-</script>
-<script type="text/javascript">
-    function formSubmit(name){
-        $('#category').val(name);
-        $('#productsForm').submit();
-    }
-</script>
 
-@endsection
