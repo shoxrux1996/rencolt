@@ -15,6 +15,7 @@
     <!-- Your custom styles (optional) -->
     <link href="{{asset('assets/css/style.min.css')}}" rel="stylesheet">
     <link rel="stylesheet" type="text/css" href="{{asset('assets/css/my.css')}}">
+    <link rel="stylesheet" type="text/css" href="{{asset('assets/css/media.css')}}">
     @yield('styles')
 </head>
 

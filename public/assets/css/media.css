@@ -1,0 +1,44 @@
+/*Media Queries For Google Map*/
+
+@media (min-width:992px) and (max-width:1200px) {
+    .map {
+        max-width:250px;
+        min-height:300px;
+    }
+}
+
+
+@media (min-width:768px) and (max-width:992px) {
+    .map {
+        max-width:600px;
+        min-height:300px;
+    }
+}	
+
+@media (min-width:320px) and (max-width:480px) {
+    .map {
+        max-width:290px;
+        min-height:250px;
+    }
+}
+
+
+@media (min-width:320px) and (max-height:570px) {
+    .map {
+        max-width:290px;
+        min-height:250px;
+        margin-right:5px;
+    }
+}
+
+
+/*End of Google Map`s Media Query*/
+
+
+/*Index Page Media Query*/
+
+@media (min-width:320px) and (max-width:480px){
+    .index-image{
+        
+    }
+}
