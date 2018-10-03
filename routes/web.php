@@ -14,9 +14,9 @@
 Route::get('/', 'WebController@index')->name('index');
 Route::get('products/{category}', 'WebController@products')->name('products');
 Route::get('product/{id}', 'WebController@product')->name('product');
-Route::get('objects','WebController@objects')->name('objects');
+Route::get('objects/{category}','WebController@objects')->name('objects');
 Route::get('object/{id}', 'WebController@object')->name('object');
-Route::get('videos','WebController@videos')->name('videos');
+Route::get('videos/{category}','WebController@videos')->name('videos');
 Route::get('video/{id}', 'WebController@video')->name('video');
 // Route::get('category/{name}', 'WebController@category')->name('category');
 Route::get('contacts', 'WebController@aboutus')->name('aboutus');
@@ -37,9 +37,11 @@ Route::prefix('admin')->group(function () {
     Route::post('update/profile', 'Admin\AdminController@update')->name('update.profile');
 
     Route::get('categories/destroy/{id?}', 'Admin\AdminCategoryController@destroy')->name('categories.destroy');
+    Route::get('categories/edit/{id?}', 'Admin\AdminCategoryController@edit')->name('categories.edit');
     Route::post('categories/update/{id?}', 'Admin\AdminCategoryController@update')->name('categories.update');
     Route::get('categories', 'Admin\AdminCategoryController@index')->name('categories.index');
     Route::post('categories/store', 'Admin\AdminCategoryController@store')->name('categories.store');
+    Route::get('categories/image/delete/{id?}/{image?}','Admin\AdminCategoryController@deleteImage')->name('category.image.delete');
 
     Route::get('products/destroy/{id?}', 'Admin\AdminProductController@destroy')->name('products.destroy');
     Route::post('products/update/{id?}', 'Admin\AdminProductController@update')->name('products.update');

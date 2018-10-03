@@ -36,15 +36,6 @@
                             <thead>
                             <tr>
                                 <th>
-                                  Название
-                                </th>
-                                <th>
-                                  Номи
-                                </th>
-                                <th>
-                                  Name
-                                </th>
-                                <th>
                                   Изображение
                                 </th>
                                 <th>
@@ -69,19 +60,6 @@
                         </div>
                     @endif
                   <div class="form-group">
-                    <label for="name_ru">Название</label>
-                    <input type="text" class="form-control" id="name_ru" {{-- aria-describedby="emailHelp" --}} placeholder="Названия"  name="name_ru" value="{{old('name_ru')}}" required>
-                    {{-- <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small> --}}
-                  </div>
-                  <div class="form-group">
-                    <label for="name_uz">Номи</label>
-                    <input type="text" class="form-control" name="name_uz" id="name_uz" placeholder="Nomi" value="{{old('name_uz')}}">
-                  </div>
-                  <div class="form-group">
-                    <label for="name_en">Name</label>
-                    <input type="text" class="form-control" name="name_en" id="name_en" placeholder="Name" value="{{old('name_en')}}">
-                  </div>
-                  <div class="form-group">
                     <label for="category">Категория</label>
                     <select class="form-control select2" name="categories[]" multiple="multiple">
                       @foreach($categories as $category)
@@ -96,24 +74,6 @@
                     </div>
                     <div class="form-group image-preview col-md-6">
                     </div>
-                  </div>
-                  <div class="form-group">
-                    <label for="text_ru">Cведения</label>
-                    <textarea required class="form-control richTextBox" name="text_ru" id="richtext">
-                      {{old('text_ru')}}
-                    </textarea>
-                  </div>
-                  <div class="form-group">
-                    <label for="text_uz">Маълумот</label>
-                    <textarea class="form-control richTextBox" name="text_uz" id="richtext">
-                      {{old('text_uz')}}
-                    </textarea>
-                  </div>
-                  <div class="form-group">
-                    <label for="text_en">Information</label>
-                    <textarea class="form-control richTextBox" name="text_en" id="richtext">
-                      {{old('text_en')}}
-                    </textarea>
                   </div>
                   <button type="submit" class="btn btn-primary">Сохранить</button>
                 </form>
@@ -147,7 +107,7 @@
                   $('#upload_file').trigger('click');
                 }
             },
-        toolbar: 'styleselect bold italic underline | forecolor backcolor | alignleft aligncenter alignright | bullist numlist outdent indent | link image table youtube giphy | code',
+        toolbar: 'styleselect bold italic underline | forecolor backcolor | alignleft aligncenter alignright | bullist numlist outdent indent | link image table youtube giphy | code | removeformat',
         convert_urls: false,
         image_caption: true,
         image_title: true,
@@ -168,15 +128,6 @@
                 }
             },
             columns: [
-                {
-                    data: "name_ru"
-                },
-                {
-                    data: "name_uz"
-                },
-                {
-                    data: "name_en"
-                },
                 {
                     data: 'images',
                     render: function (data, type, full) {

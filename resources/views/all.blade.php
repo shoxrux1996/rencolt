@@ -35,7 +35,7 @@
                                             @foreach($categories as $category )
                                             <a href="#" onclick="formSubmit('{{$category->name_ru}}')" id="cs23"><h6 class="description">{{$category->getTranslatedAttribute('name')}} &ensp; &ensp; &ensp;&ensp;&ensp;&ensp;&ensp; {{$category->products->count()}}</h6></a>
                                             @endforeach
-                                            
+
                                         </div>
 
                                         {{-- <div class="col-md-12">
@@ -58,7 +58,7 @@
                                                     </div>
                                                 </div>
                                                 @endforeach
-                                                
+
                                             </div>
                                         </div> --}}
                                     </div>

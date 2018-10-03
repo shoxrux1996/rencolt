@@ -36,6 +36,7 @@ class AdminCategoryController extends Controller
                         ->withInput();
         }
     	$category = new Category($request->all());
+
         if ($request->hasFile('image')) {
             $file = $request->file('image');
 
@@ -47,7 +48,7 @@ class AdminCategoryController extends Controller
 			}
             $image = Image::make($file)->resize(
                 800,
-                600
+                800
             )->encode($file->getClientOriginalExtension(), 100);
 
             if ($this->is_animated_gif($file)) {
@@ -83,13 +84,60 @@ class AdminCategoryController extends Controller
 
         	$category->image = $fullPath;
         }
+        $filesPath = [];
+        if ($files = $request->file('images')) {
+
+            foreach ($files as $key => $file) {
+                $path = 'categories'.'/'.date('FY').'/';
+                $filename = Str::random(20);
+
+                while (Storage::disk('public')->exists($path.$filename.'.'.$file->getClientOriginalExtension())) {
+                    $filename = Str::random(20);
+                }
+                $image = Image::make($file)->resize(
+                    800,
+                    800
+                )->encode($file->getClientOriginalExtension(), 100);
+
+
+                $fullPath = $path.$filename.'.'.$file->getClientOriginalExtension();
+
+                if ($this->is_animated_gif($file)) {
+                    Storage::disk('public')->put($fullPath, file_get_contents($file), 'public');
+                    $fullPathStatic = $path.$filename.'-static.'.$file->getClientOriginalExtension();
+                    Storage::disk('public')->put($fullPathStatic, (string) $image, 'public');
+                } else {
+                    Storage::disk('public')->put($fullPath, (string) $image, 'public');
+                }
+
+                array_push($filesPath, $fullPath);
+                /*Thumbnail image*/
+                // $scale = intval($thumbnails->scale) / 100;
+                $image = Image::make($file)->resize(
+                    400,
+                    400
+                )->encode($file->getClientOriginalExtension(), 75);
+                // } elseif (isset($options->thumbnails) && isset($thumbnails->crop->width) && isset($thumbnails->crop->height)) {
+                //     $crop_width = $thumbnails->crop->width;
+                //     $crop_height = $thumbnails->crop->height;
+                //     $image = Image::make($file)
+                //         ->fit($crop_width, $crop_height)
+                //         ->encode($file->getClientOriginalExtension(), 75);
+                // }
+                Storage::disk('public')->put(
+                    $path.$filename.'-'.'small'.'.'.$file->getClientOriginalExtension(),
+                    (string) $image,
+                    'public'
+                );
+            }
+            $category->images = json_encode($filesPath);
+        }
     	$category->save();
     	return redirect()->back()->with('message','Категория успешно создана');
     }
     public function update(Request $request, $id = null){
     	$validator = Validator::make($request->all(),[
             'name_ru'=>'required',
-            'text_ru' => 'required',
             'slug' =>  Rule::unique('categories')->ignore($id, 'id')
         ]);
         if($validator->fails() || $id == null){
@@ -126,8 +174,8 @@ class AdminCategoryController extends Controller
 
             if ($this->is_animated_gif($file)) {
                 Storage::disk('public')->put($fullPath, file_get_contents($file), 'public');
-                $fullPathStatic = $path.$filename.'-static.'.$file->getClientOriginalExtension();
-                Storage::disk('public')->put($fullPathStatic, (string) $image, 'public');
+//                $fullPathStatic = $path.$filename.'-static.'.$file->getClientOriginalExtension();
+//                Storage::disk('public')->put($fullPathStatic, (string) $image, 'public');
             } else {
                 Storage::disk('public')->put($fullPath, (string) $image, 'public');
             }
@@ -157,8 +205,66 @@ class AdminCategoryController extends Controller
             $this->deleteFileIfExists($category->image);
             $category->image = $fullPath;
         }
+        $filesPath = [];
+        if ($files = $request->file('images')) {
+
+            foreach ($files as $key => $file) {
+                $path = 'categories'.'/'.date('FY').'/';
+                $filename = Str::random(20);
+
+                while (Storage::disk('public')->exists($path.$filename.'.'.$file->getClientOriginalExtension())) {
+                    $filename = Str::random(20);
+                }
+                $image = Image::make($file)->resize(
+                    800,
+                    800
+                )->encode($file->getClientOriginalExtension(), 100);
+
+
+                $fullPath = $path.$filename.'.'.$file->getClientOriginalExtension();
+
+                if ($this->is_animated_gif($file)) {
+                    Storage::disk('public')->put($fullPath, file_get_contents($file), 'public');
+                    $fullPathStatic = $path.$filename.'-static.'.$file->getClientOriginalExtension();
+                    Storage::disk('public')->put($fullPathStatic, (string) $image, 'public');
+                } else {
+                    Storage::disk('public')->put($fullPath, (string) $image, 'public');
+                }
+
+                array_push($filesPath, $fullPath);
+                /*Thumbnail image*/
+                // $scale = intval($thumbnails->scale) / 100;
+                $image = Image::make($file)->resize(
+                    400,
+                    400
+                )->encode($file->getClientOriginalExtension(), 75);
+                // } elseif (isset($options->thumbnails) && isset($thumbnails->crop->width) && isset($thumbnails->crop->height)) {
+                //     $crop_width = $thumbnails->crop->width;
+                //     $crop_height = $thumbnails->crop->height;
+                //     $image = Image::make($file)
+                //         ->fit($crop_width, $crop_height)
+                //         ->encode($file->getClientOriginalExtension(), 75);
+                // }
+                Storage::disk('public')->put(
+                    $path.$filename.'-'.'small'.'.'.$file->getClientOriginalExtension(),
+                    (string) $image,
+                    'public'
+                );
+            }
+
+            $images = json_decode($category->images);
+
+            if($images != null || $images != ""){
+                $images = json_encode(array_merge($images,$filesPath));
+            }else{
+                $images = json_encode($filesPath);
+            }
+
+            $category->images = $images;
+        }
+
         $category->save();
-        return redirect()->back()->with('message','Категория успешно изменена');
+        return redirect()->route('categories.index')->with('message','Категория успешно изменена');
     }
 
 
@@ -194,11 +300,37 @@ class AdminCategoryController extends Controller
 
         return $frames > 1;
     }
+    public function deleteImage($id, $image){
 
+        $product = Category::findOrFail($id);
+        // Decode field value
+        $fieldData = @json_decode($product->images, true);
+
+        // // Flip keys and values
+        // $fieldData = array_flip($fieldData);
+
+        // Remove image from array
+
+        $this->deleteFileIfExists($fieldData[$image]);
+        unset($fieldData[$image]);
+
+        // Generate json and update field
+        $product->images = json_encode(array_values($fieldData));
+
+        $product->save();
+        return redirect()->back()->with('message', 'Изображение успешно удалено')->withInput();
+
+    }
     public function destroy($id = null){
         if($id != null){
             $category = Category::findOrFail($id);
             $this->deleteFileIfExists($category->image);
+            $images = json_decode($category->images);
+            if($images != null){
+                foreach ($images as $key => $image) {
+                    $this->deleteFileIfExists($image);
+                }
+            }
             $category->delete();
 
             return redirect()->back()->with('message', 'Категория успешно удалена');
@@ -219,6 +351,10 @@ class AdminCategoryController extends Controller
             }
         }
 
-
+    }
+    public function edit($id = null)
+    {
+        $product = Category::findOrFail($id);
+        return view('categories.edit')->withProduct($product)->withCategories(Category::orderBy('id')->get());
     }
 }

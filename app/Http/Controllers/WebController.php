@@ -18,10 +18,12 @@ class WebController extends Controller
     public function products($category){
         $products = Product::whereHas('categories', function($query) use ($category){
             $query->where('name_ru', "$category");
-        })->orderByDesc('id')->paginate(12);
+        })->orderByDesc('id')->get();
 
         return view('products')->withCategories(Category::orderBy('id')->get())
-        ->withProducts($products)->withCategor(Category::where('name_ru', $category)->first());
+        ->withProducts($products)->withCategory(Category::where('name_ru', $category)->first());
+
+
     }
     public function product($id){
         $product = Product::findOrFail($id);
@@ -35,9 +37,13 @@ class WebController extends Controller
 
     }
 
-    public function objects(){
+    public function objects($category){
+        $products = Objec::whereHas('categories', function($query) use ($category){
+            $query->where('name_ru', "$category");
+        })->orderByDesc('id')->get();
         return view('objects')->withCategories(Category::orderBy('id')->get())
-        ->withProducts(Objec::orderByDesc('id')->get());
+
+        ->withProducts($products);
     }
     public function object($id){
         $product = Objec::findOrFail($id);
@@ -50,8 +56,11 @@ class WebController extends Controller
     }
 
 
-    public function videos(){
-    	return view('videos')->withCategories(Category::orderBy('id')->get())->withVideos(Video::orderByDesc('id')->get());
+    public function videos($category){
+        $products = Video::whereHas('categories', function($query) use ($category){
+            $query->where('name_ru', "$category");
+        })->orderByDesc('id')->get();
+    	return view('videos')->withCategories(Category::orderBy('id')->get())->withVideos($products);
     }
     public function video($id){
         $product = Video::findOrFail($id);

@@ -1,5 +1,37 @@
-<!--Carousel Wrapper-->
-<div id="carousel-example-1z" class="carousel slide carousel-fade" data-ride="carousel">
+<!-- Navbar -->
+    <!--Carousel Wrapper-->
+    <div>
+        <ol class="carousel-indicators">
+            <div id="multi-item-example" class="carousel slide carousel-multi-item carousel-multi-item-2" data-ride="carousel">
+                <!--Controls-->
+                <div class="controls-top text-center">
+                    <a class="white-text" href="#multi-item-example" data-slide="prev"><i class="fa fa-angle-left fa-3x pr-3"></i></a>
+                    <a class="white-text" href="#multi-item-example" data-slide="next"><i class="fa fa-angle-right fa-3x pl-3"></i></a>
+                </div>
+                <!--/.Controls-->
+                <!--Slides-->
+                <div class="carousel-inner" role="listbox">
+                    <!--First slide-->
+                    @foreach($categories as $key => $category)
+                    @if($key%4 == 0)<div class="carousel-item {{$key == 0 ? 'active' : ''}}">@endif
+                        <div class="col-md-3 mb-3 view view-cascade  overlay">
+                            <a href="{{route('products', $category->name_ru)}}">
+                                <div class="">
+                                    <img class="img-fluid rounded-circle img-thumbnail index-image" src="{{$category->image != null || $category->image != ''? asset('storage/'.$category->image) : asset('assets/img/res/travertin.jpg')}}" alt="No Image">
+                                </div>
+                            </a>
+                        </div>
+                    @if($key%4 == 3 || $key == ($categories->count()-1))</div>@endif
+                    @endforeach
+                    <!--/.First slide-->
+                </div>
+            <!--/.Slides-->
+            </div>
+        </ol>
+    </div>
+    <!--/.Carousel Wrapper-->
+
+    <div id="carousel-example-1z" class="carousel slide carousel-fade" data-ride="carousel">
         <!--Indicators-->
         <ol class="carousel-indicators">
             <li data-target="#carousel-example-1z" data-slide-to="0" class="active"></li>
@@ -16,15 +48,12 @@
                     <div class="mask rgba-black-light d-flex justify-content-center align-items-center">
                         <!-- Content -->
                         <div class="text-left white-text mx-5 wow lightSpeedIn">
-                            <h1 class="mb-4">
+                            <h4 class="mb-4 index-title">
                                 <strong class="display-4">@lang('главная.отточенто_краска')</strong>
-                            </h1>
+                            </h4>
                             <p class="mb-4 d-md-block wow bounceIn" id="cs3">
                                 <strong style="font-size: 30px">@lang('главная.справтесь')</strong>
                             </p>
-                            <a href="{{route('products','Отточенто краска')}}" class="btn btn-deep-purple btn-lg wow flipInX" id="cs4" data-toggle="tooltip" data-placement="top" title="@lang('главная.перейти')">@lang('главная.читать')
-                                <i class="fa fa-paste ml-2"></i>
-                            </a>
                         </div>
                         <!-- Content -->
                     </div>
@@ -39,22 +68,20 @@
                     <div class="mask rgba-black-light d-flex justify-content-center align-items-center">
                         <!-- Content -->
                         <div class="text-left white-text mx-5 wow fadeInDown">
-                            <h1 class="mb-4">
+                            <h4 class="mb-4 index-title">
                                 <strong class="display-4">@lang('главная.эмульсия')</strong>
-                            </h1>
+                            </h4>
                             <p class="mb-4 d-md-block wow flipInX">
                                 <strong style="font-size: 30px">@lang('главная.качество')</strong>
                             </p>
-                            <a href="{{route('products','Эмульсия')}}" class="btn btn-pink btn-lg wow flipInY" data-toggle="tooltip" data-placement="top" title="@lang('главная.перейти')"
-                                id="cs4">@lang('главная.узнать')
-                                <i class="fa fa-paste ml-2"></i>
-                            </a>
+
                         </div>
                         <!-- Content -->
                     </div>
                     <!-- Mask & flexbox options-->
                 </div>
             </div>
+
             <!--/Second slide-->
             <!--Third slide-->
             <div class="carousel-item">
@@ -63,21 +90,22 @@
                     <div class="mask rgba-black-light d-flex justify-content-center align-items-center">
                         <!-- Content -->
                         <div class="text-left white-text mx-5 wow slideInLeft">
-                            <h1 class="mb-4">
+                            <h4 class="mb-4 index-title">
                                 <strong class="display-4">@lang('главная.клей')</strong>
-                            </h1>
+                            </h4>
                             <p class="mb-4 d-md-block wow bounceIn">
                                 <strong style="font-size: 30px">@lang('главная.мощный')</strong>
                             </p>
-                            <a href="{{route('products','Клей ПВА')}}" class="btn btn-amber btn-lg wow flipInX" data-toggle="tooltip" data-placement="top" title="@lang('главная.перейти')"
-                                id="cs4">@lang('главная.узнать')
-                                <i class="fa fa-paste ml-2"></i>
-                            </a>
+
                         </div>
                         <!-- Content -->
+
                     </div>
                     <!-- Mask & flexbox options-->
                 </div>
+            </div>
+            <div class="fixed-action-btn smooth-scroll position-fixed animated wow fixed-bottom bounce infinite">
+                <button type="button" class="btn btn-orange waves-effect waves-light fixed-bottom  position-absolute position-fixed" data-toggle="modal" data-target="#centralModalDanger" style="border-radius: 400px"><i class="fa fa-phone"></i></button>
             </div>
             <!--/Third slide-->
         </div>

@@ -44,19 +44,6 @@
                             </ul>
                         </div>
                     @endif
-                  <div class="form-group">
-                    <label for="name_ru">Название</label>
-                    <input type="text" class="form-control" id="name_ru" {{-- aria-describedby="emailHelp" --}} placeholder="Названия"  name="name_ru" value="{{$product->name_ru}}" required>
-                    {{-- <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small> --}}
-                  </div>
-                  <div class="form-group">
-                    <label for="name_uz">Номи</label>
-                    <input type="text" class="form-control" name="name_uz" id="name_uz" placeholder="Nomi" value="{{$product->name_uz}}">
-                  </div>
-                  <div class="form-group">
-                    <label for="name_en">Name</label>
-                    <input type="text" class="form-control" name="name_en" id="name_en" placeholder="Name" value="{{$product->name_en}}">
-                  </div>
 
                    <div class="form-group">
                     <label for="category">Категория</label>
@@ -82,26 +69,6 @@
                       @endforeach
                    @endif
                   </div>
-
-                  <div class="form-group">
-                    <label for="text_ru">Cведения</label>
-                    <textarea required class="form-control richTextBox" name="text_ru" id="text_ru">
-                      {{$product->text_ru}}
-                    </textarea>
-                  </div>
-                  
-                  <div class="form-group">
-                    <label for="text_uz">Маълумот</label>
-                    <textarea class="form-control richTextBox " name="text_uz" id="text_uz">
-                      {{$product->text_uz}}
-                    </textarea>
-                  </div>
-                  <div class="form-group">
-                    <label for="text_en">Information</label>
-                    <textarea class="form-control richTextBox " name="text_en" id="text_en">
-                      {{$product->text_en}}
-                    </textarea>
-                  </div>
                   <button type="submit" class="btn btn-primary">Изменить</button>
                 </form>
               </div>
@@ -119,7 +86,6 @@
   <script type="text/javascript" src="{{ asset('js/tinymce.js') }}"></script>
   <script>
 
-      var table;
       window.onload = function () {
           
            tinymce.init({
@@ -135,7 +101,7 @@
                         $('#upload_file').trigger('click');
                       }
                   },
-              toolbar: 'styleselect bold italic underline | forecolor backcolor | alignleft aligncenter alignright | bullist numlist outdent indent | link image table youtube giphy | code',
+              toolbar: 'styleselect bold italic underline | forecolor backcolor | alignleft aligncenter alignright | bullist numlist outdent indent | link image table youtube giphy | code | removeformat',
               convert_urls: false,
               image_caption: true,
               image_title: true,
@@ -146,55 +112,6 @@
               }
             });
 
-            table = $('#category-table').DataTable({
-                processing: true,
-                serverSide: true,
-                ajax: {
-                    url: '{{ route('objects.browse') }}',
-                    type: 'POST',
-                    data: {
-                        '_token': '{{ csrf_token() }}'
-                    }
-                },
-                columns: [
-                    {
-                        data: "name_ru"
-                    },
-                    {
-                        data: "name_uz"
-                    },
-                    {
-                        data: "name_en"
-                    },
-                    {
-                        data: 'images',
-                        render: function (data, type, full) {
-                          var src = '{{ asset('storage/') }}'
-                          if(full.images != null){
-                            var images = full.images.slice(0, 4);
-                            var sum = '';
-                           for (var i = 0; i< images.length; i++){
-                              sum = sum + '<img src="'+src+'/'+images[i]+'" style="width:50px">'
-                           }
-                           return sum;
-                          }else{
-                            return '';
-                          }
-                        },
-                        orderable:false
-                    },
-                    {
-                        orderable:false,
-                        data: null, render: function (data, type, full, meta) {
-                          var url = '{{ route('objects.edit', null) }}';
-                          var href='{{ route('objects.destroy', null) }}';
-                        return '<a href="'+url+'/'+data.id+'" title="Изменить" class="btn btn-sm btn-primary edit pull-right"> <span class="">Изменить</span></a>' + '<a href="'+href+'/'+data.id+'" onclick="return confirm(\'Хотите Удалить\')" title="Удалить" class="btn btn-sm btn-danger delete pull-right"> <span class="">Удалить</span></a>';
-                        },
-                        width: '10%'
-                    }
-                ],
-                "language": '{!!json_encode(config('datatables.datatable', [])) !!}'
-            });
       }
 
       

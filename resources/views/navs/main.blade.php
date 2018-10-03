@@ -44,13 +44,13 @@
                     </li>
                 </ul>
                 <!-- Right -->
-                <ul class="navbar-nav nav-flex-icons">
+                {{-- <ul class="navbar-nav nav-flex-icons">
                     <li class="nav-item">
                         <a href="#!" class="nav-link border border-light rounded">
                             <i class="black-text animated jackInTheBox infinite fa fa-phone mr-2"></i>{{env('PHONE')}}
                         </a>
                     </li>
-                </ul>
+                </ul> --}}
             </div>
         </div>
 </nav>

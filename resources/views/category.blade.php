@@ -1,14 +1,17 @@
 @extends('layouts.main')
 @section('styles')
-<link rel="stylesheet" type="text/css" href="{{ asset('assets/css/ext2.css') }}">
-<link rel="stylesheet" href="{{ asset('css/baguetteBox.min.css') }} " />
-<link rel="stylesheet" href="{{ asset('assets/css/cards-gallery.css') }}">
+
+<link href="https://fonts.googleapis.com/css?family=Headland+One" rel="stylesheet">
+<link rel="stylesheet" type="text/css" href="{{asset('assets/css/jquery.magnify.css')}}">
+
+<link href="{{asset('assets/css/snack-helper.css')}}" rel="stylesheet">
+<link href="{{asset('assets/css/magnify-bezelless-theme.css')}}" rel="stylesheet">
 @endsection
 @section('title')
-    Продукты
+    Renkcolt - Uzbekistan
 @endsection
 @section('content')
-    @include('navs.main', ['style' => true])
+    @include('navs.main', ['class' => "transparent"])
     <div class="wrapper" id="cs2">
         <div class="main main-raised">
             <div class="container">

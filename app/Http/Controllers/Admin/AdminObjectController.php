@@ -26,7 +26,7 @@ class AdminObjectController extends Controller
     }
     public function store(Request $request){
     	$validator = Validator::make($request->all(),[
-    		'name_ru'=>'required',
+
     	]);
     	if($validator->fails()){
              return redirect()->back()
@@ -45,10 +45,7 @@ class AdminObjectController extends Controller
 	         	while (Storage::disk('public')->exists($path.$filename.'.'.$file->getClientOriginalExtension())) {
 	            	$filename = Str::random(20);
 				}
-	            $image = Image::make($file)->resize(
-	                800,
-	                600
-	            )->encode($file->getClientOriginalExtension(), 100);
+	            $image = Image::make($file)->encode($file->getClientOriginalExtension(), 100);
 
 
 	            $fullPath = $path.$filename.'.'.$file->getClientOriginalExtension();
@@ -66,7 +63,7 @@ class AdminObjectController extends Controller
 	             	// $scale = intval($thumbnails->scale) / 100;
 	                $image = Image::make($file)->resize(
 	                    400,
-	                    300
+	                    400
 	                )->encode($file->getClientOriginalExtension(), 75);
 	            // } elseif (isset($options->thumbnails) && isset($thumbnails->crop->width) && isset($thumbnails->crop->height)) {
 	            //     $crop_width = $thumbnails->crop->width;
@@ -92,7 +89,7 @@ class AdminObjectController extends Controller
     public function update(Request $request, $id = null){
 
     	$validator = Validator::make($request->all(),[
-            'name_ru'=>'required'
+
         ]);
         if($validator->fails() || $id == null){
              return redirect()->back()
@@ -119,10 +116,7 @@ class AdminObjectController extends Controller
 	         	while (Storage::disk('public')->exists($path.$filename.'.'.$file->getClientOriginalExtension())) {
 	            	$filename = Str::random(20);
 				}
-	            $image = Image::make($file)->resize(
-	                800,
-	                600
-	            )->encode($file->getClientOriginalExtension(), 100);
+	            $image = Image::make($file)->encode($file->getClientOriginalExtension(), 100);
 
 
 	            $fullPath = $path.$filename.'.'.$file->getClientOriginalExtension();
@@ -140,7 +134,7 @@ class AdminObjectController extends Controller
 	             	// $scale = intval($thumbnails->scale) / 100;
 	                $image = Image::make($file)->resize(
 	                    400,
-	                    300
+	                    400
 	                )->encode($file->getClientOriginalExtension(), 75);
 	            // } elseif (isset($options->thumbnails) && isset($thumbnails->crop->width) && isset($thumbnails->crop->height)) {
 	            //     $crop_width = $thumbnails->crop->width;

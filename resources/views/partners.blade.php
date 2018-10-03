@@ -3,7 +3,7 @@
 Uzbekistan
 @endsection
 @section('content')
-    @include('navs.main', ['class' => "warning-color"])
+    @include('navs.main', ['class' => "transparent"])
     <!--Main layout-->
     <main id="cs11" class="elegant-color">
         <div class="container z-depth-7 example  lime darken-1" id="cs10">

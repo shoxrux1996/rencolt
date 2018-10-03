@@ -16,6 +16,25 @@
     <link href="{{asset('assets/css/style.min.css')}}" rel="stylesheet">
     <link rel="stylesheet" type="text/css" href="{{asset('assets/css/my.css')}}">
     <link rel="stylesheet" type="text/css" href="{{asset('assets/css/media.css')}}">
+    <link href="https://fonts.googleapis.com/css?family=Headland+One" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="{{asset('assets/css/jquery.magnify.css')}}">
+
+    {{--<link href="{{asset('assets/css/snack-helper.css')}}" rel="stylesheet">--}}
+    <link href="{{asset('assets/css/magnify-bezelless-theme.css')}}" rel="stylesheet">
+    <style>
+        @media (min-width: 68px) {
+            .carousel-multi-item-2 .col-md-3 {
+                float: left;
+                width: 25%;
+                max-width: 100%;
+            }
+        }
+
+        .carousel-multi-item-2 .card img {
+            border-radius: 4px;
+        }
+        </style>
+
     @yield('styles')
 </head>
 
@@ -85,6 +104,35 @@
             </div>
         </div>
     </div>
+    <!-- Central Modal Medium Danger -->
+    <div class="modal fade" id="centralModalDanger" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-side modal-warning modal-top-left" role="document">
+            <!--Content-->
+            <div class="modal-content">
+                <!--Header-->
+                <div class="modal-header orange white-text">
+                    <p class="heading lead">@lang('главная.контакт')</p>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true" class="white-text">&times;</span>
+                    </button>
+                </div>
+                <!--Body-->
+                <div class="modal-body">
+                    <div class="text-center">
+                        <i class="fa fa-phone fa-4x mb-3 animated rotateIn"></i>
+                        <p>{{env('PHONE')}}</p>
+                        <p>{{env('PHONE2')}}</p>
+                    </div>
+                </div>
+                <!--Footer-->
+                <div class="modal-footer justify-content-center orange">
+                    <button type="button" class="btn btn-outline-white waves-effect" data-dismiss="modal">@lang('главная.закрыть')</button>
+                </div>
+            </div>
+            <!--/.Content-->
+        </div>
+    </div>
+    <!-- Central Modal Medium Danger-->
     <!-- Modal: modalPoll -->
     <!-- Side Modal Top Right -->
     <!-- To change the direction of the modal animation change .right class -->
@@ -154,6 +202,7 @@
     <script type="text/javascript" src="{{asset('assets/js/bootstrap.min.js')}}"></script>
     <!-- MDB core JavaScript -->
     <script type="text/javascript" src="{{asset('assets/js/mdb.min.js')}}"></script>
+
     @if(Session::has('message'))
     <script type="text/javascript">
         $('#telegramModal').modal('show');
@@ -171,7 +220,7 @@
         });
     </script>
 
-
+    <script src="{{asset('assets/js/jquery.magnify.js')}}"></script>
     @yield('scripts')
 </body>
 

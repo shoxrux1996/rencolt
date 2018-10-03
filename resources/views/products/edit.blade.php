@@ -32,7 +32,7 @@
           <div class="tab-pane active" id="edit" role="tabpanel" aria-labelledby="edit-tab">
             <div class="card">
               <div class="card-body">
-                <h5 class="card-title"> Изменить категорию</h5>
+                <h5 class="card-title"> Изменить продукт</h5>
                 <form action="{{ route('products.update', $product->id) }}" method="POST" enctype="multipart/form-data">
                   @csrf
                   @if($errors->edit->any())
@@ -135,7 +135,7 @@
                         $('#upload_file').trigger('click');
                       }
                   },
-              toolbar: 'styleselect bold italic underline | forecolor backcolor | alignleft aligncenter alignright | bullist numlist outdent indent | link image table youtube giphy | code',
+              toolbar: 'styleselect bold italic underline | forecolor backcolor | alignleft aligncenter alignright | bullist numlist outdent indent | link image table youtube giphy | code | removeformat',
               convert_urls: false,
               image_caption: true,
               image_title: true,

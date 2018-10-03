@@ -24,7 +24,7 @@ class AdminProductController extends Controller
 
     	return view('products.index')->withCategories(Category::orderBy('id')->get());
     }
-        public function store(Request $request){
+    public function store(Request $request){
     	$validator = Validator::make($request->all(),[
     		'name_ru'=>'required',
             'categories.*.id'=>'integer|exists:categories'
@@ -47,8 +47,8 @@ class AdminProductController extends Controller
 	            	$filename = Str::random(20);
 				}
 	            $image = Image::make($file)->resize(
-	                800,
-	                600
+                    800,
+                    800
 	            )->encode($file->getClientOriginalExtension(), 100);
 
 
@@ -67,7 +67,7 @@ class AdminProductController extends Controller
 	             	// $scale = intval($thumbnails->scale) / 100;
 	                $image = Image::make($file)->resize(
 	                    400,
-	                    300
+	                    400
 	                )->encode($file->getClientOriginalExtension(), 75);
 	            // } elseif (isset($options->thumbnails) && isset($thumbnails->crop->width) && isset($thumbnails->crop->height)) {
 	            //     $crop_width = $thumbnails->crop->width;
@@ -123,7 +123,7 @@ class AdminProductController extends Controller
 				}
 	            $image = Image::make($file)->resize(
 	                800,
-	                600
+	                800
 	            )->encode($file->getClientOriginalExtension(), 100);
 
 
@@ -142,7 +142,7 @@ class AdminProductController extends Controller
 	             	// $scale = intval($thumbnails->scale) / 100;
 	                $image = Image::make($file)->resize(
 	                    400,
-	                    300
+	                    400
 	                )->encode($file->getClientOriginalExtension(), 75);
 	            // } elseif (isset($options->thumbnails) && isset($thumbnails->crop->width) && isset($thumbnails->crop->height)) {
 	            //     $crop_width = $thumbnails->crop->width;

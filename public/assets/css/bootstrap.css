@@ -484,7 +484,7 @@ mark,
 
 .img-thumbnail {
   padding: 0.25rem;
-  background-color: #fff;
+  background-color: black;
   border: 1px solid #dee2e6;
   border-radius: 0.25rem;
   max-width: 100%;
@@ -2959,7 +2959,7 @@ input[type="button"].btn-block {
 }
 
 .fade {
-  transition: opacity 0.15s linear;
+  transition: opacity 0.35s linear;
 }
 
 @media screen and (prefers-reduced-motion: reduce) {
@@ -6213,6 +6213,10 @@ button.bg-dark:focus {
 
 .rounded-circle {
   border-radius: 50% !important;
+  border-color: black;
+
+
+  
 }
 
 .rounded-0 {

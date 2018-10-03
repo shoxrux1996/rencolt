@@ -41,7 +41,7 @@
                                   Изображение
                                 </th>
                                 <th>
-                                  
+
                                 </th>
                             </tr>
                           </thead>
@@ -79,7 +79,7 @@
                     <label for="slug">Slug</label>
                     <input type="text" class="form-control" name="slug" id="slug" placeholder="Slug" data-name="Slug" value="" data-slug-origin="name_ru">
                   </div>
-                  <div class="form-row">
+                    <div class="form-row">
                     <div class="form-group col-md-4">
                        <label for="image">Изображение</label>
                        <input type="file" class="form-control" name="image" id="category-img">
@@ -92,14 +92,21 @@
                     <div class="form-group col-md-1">
                     </div>
                   </div>
-
+                    <div class="form-row">
+                        <div class="form-group col-md-12">
+                            <label for="image">Каталог</label>
+                            <input type="file" class="form-control" name="images[]" id="category-img" multiple="multiple">
+                        </div>
+                        <div class="form-group image-preview col-md-6">
+                        </div>
+                    </div>
                   <div class="form-group">
                     <label for="text_ru">Cведения</label>
                     <textarea required class="form-control richTextBox" name="text_ru" id="richtext">
                       {{old('text_ru')}}
                     </textarea>
                   </div>
-                  
+
                   <div class="form-group">
                     <label for="text_uz">Маълумот</label>
                     <textarea class="form-control richTextBox" name="text_uz" id="richtext">
@@ -115,78 +122,7 @@
                   <button type="submit" class="btn btn-primary">Сохранить</button>
                 </form>
               </div>
-            </div> 
-          </div>
-          <div class="tab-pane fade" id="edit" role="tabpanel" aria-labelledby="edit-tab">
-            <div class="card">
-              <div class="card-body">
-                <h5 class="card-title"> Изменить категорию</h5>
-                <form action="" method="POST" enctype="multipart/form-data">
-                  @csrf
-                  @if($errors->edit->any())
-                        <div class="alert alert-danger">
-                            <ul>
-                                @foreach ($errors->edit->all() as $error)
-                                    <li>{{ $error }}</li>
-                                @endforeach
-                            </ul>
-                        </div>
-                    @endif
-                  <div class="form-group">
-                    <label for="name_ru">Название</label>
-                    <input type="text" class="form-control" id="name_ru" {{-- aria-describedby="emailHelp" --}} placeholder="Названия"  name="name_ru" value="{{old('name_ru')}}" required>
-                    {{-- <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small> --}}
-                  </div>
-                  <div class="form-group">
-                    <label for="name_uz">Номи</label>
-                    <input type="text" class="form-control" name="name_uz" id="name_uz" placeholder="Nomi" value="{{old('name_uz')}}">
-                  </div>
-                  <div class="form-group">
-                    <label for="name_en">Name</label>
-                    <input type="text" class="form-control" name="name_en" id="name_en" placeholder="Name" value="{{old('name_en')}}">
-                  </div>
-                  <div class="form-group">
-                    <label for="slug">Slug</label>
-                    <input type="text" class="form-control" name="slug" id="slug" placeholder="Slug" data-name="Slug" value="{{old('slug')}}" data-slug-origin="name_ru" data-slug-forceupdate=true>
-                  </div>
-                  <div class="form-row">
-                    <div class="form-group col-md-4">
-                       <label for="image">Изображение</label>
-                       <input type="file" class="form-control" name="image" id="category-edit-img">
-                    </div>
-                    <div class="form-group col-md-2">
-                    </div>
-                    <div class="form-group col-md-5">
-                      <img src="{{ asset('noimage.png') }}" id="category-edit-tag" class="category-edit-tag" width="99%" />
-                      <input type="hidden" name="photo" value="" id="photo">
-                    </div>
-                    <div class="form-group col-md-1">
-                    </div>
-                  </div>
-
-                  <div class="form-group">
-                    <label for="text_ru">Cведения</label>
-                    <textarea required class="form-control richTextBox" name="text_ru" id="text_ru">
-                      {{old('text_ru')}}
-                    </textarea>
-                  </div>
-                  
-                  <div class="form-group">
-                    <label for="text_uz">Маълумот</label>
-                    <textarea class="form-control richTextBox " name="text_uz" id="text_uz">
-                      {{old('text_uz')}}
-                    </textarea>
-                  </div>
-                  <div class="form-group">
-                    <label for="text_en">Information</label>
-                    <textarea class="form-control richTextBox " name="text_en" id="text_en">
-                      {{old('text_en')}}
-                    </textarea>
-                  </div>
-                  <button type="submit" class="btn btn-primary">Изменить</button>
-                </form>
-              </div>
-            </div> 
+            </div>
           </div>
         </div>
       </div>
@@ -197,46 +133,16 @@
   <script src="{{asset('js/jquery.cookie.js')}}"></script>
   <script type="text/javascript" src="{{asset('js/jquery.dataTables.min.js')}}"></script>
   <script type="text/javascript" src="{{asset('js/dataTables.bootstrap4.min.js')}}"></script>
- 
+
   <script type="text/javascript" src="{{ asset('js/tinymce.js') }}"></script>
   <script type="text/javascript" src="{{ asset('js/slugify.js') }}"></script>
   <script>
 
       var table;
-      function editCategory(id){
-          var edit = "#edit";
-            $('.edit-nav').removeClass('d-none');
-            $('.nav-tabs a:last').tab('show');
-            var data = table.rows().data()[id];
-            var href='{{route('categories.update', null)}}';
-            $(edit).find('form').attr('action',href+'/'+data.id);
-            $(edit).find('#name_ru').val(data.name_ru);
-
-            $(edit).find('#name_uz').val(data.name_uz);
-
-            $(edit).find('#name_en').val(data.name_en);
-            $(edit).find('#slug').val(data.slug);
-            if(data.text_ru != null){
-               tinymce.get('text_ru').setContent(data.text_ru);
-            }
-            if(data.text_uz != null){
-              tinymce.get('text_uz').setContent(data.text_uz);
-            }
-           
-            if(data.text_en != null){
-              tinymce.get('text_en').setContent(data.text_en);
-            }
-            if(data.image != null){
-              var url = '{{ asset('storage/') }}';
-              $('.category-edit-tag').attr('src', url+'/'+data.image);
-              $(edit).find('#photo').val(url + '/'+data.image);
-            }
-            
-      }
       window.onload = function () {
             @if($errors->any())
                 $('#myTab a[href="#profile"]').tab('show');
-                
+
             @endif
            @if ($errors->edit->any())
                 $('.edit-nav').removeClass('d-none');
@@ -259,7 +165,7 @@
                         $('#upload_file').trigger('click');
                       }
                   },
-              toolbar: 'styleselect bold italic underline | forecolor backcolor | alignleft aligncenter alignright | bullist numlist outdent indent | link image table youtube giphy | code',
+              toolbar: 'styleselect bold italic underline | forecolor backcolor | alignleft aligncenter alignright | bullist numlist outdent indent | link image table youtube giphy | code | removeformat',
               convert_urls: false,
               image_caption: true,
               image_title: true,
@@ -305,8 +211,9 @@
                     {
                         orderable:false,
                         data: null, render: function (data, type, full, meta) {
+                        var url = '{{ route('categories.edit', null) }}';
                           var href='{{ route('categories.destroy', null) }}';
-                        return '<a onclick="editCategory('+meta.row+')" title="Изменить" class="btn btn-sm btn-primary edit pull-right"> <span class="">Изменить</span></a>' + '<a href="'+href+'/'+data.id+'" onclick="return confirm(\'Хотите Удалить\')" title="Удалить" class="btn btn-sm btn-danger delete pull-right"> <span class="">Удалить</span></a>';
+                        return '<a href="'+url+'/'+data.id+'" title="Изменить" class="btn btn-sm btn-primary edit pull-right"> <span class="">Изменить</span></a>' + '<a href="'+href+'/'+data.id+'" onclick="return confirm(\'Хотите Удалить\')" title="Удалить" class="btn btn-sm btn-danger delete pull-right"> <span class="">Удалить</span></a>';
                         },
                         width: '10%'
                     }
@@ -315,7 +222,7 @@
             });
       }
 
-      
+
   </script>
   <script type="text/javascript">
     function readURL(input) {
@@ -323,21 +230,9 @@
 
 
             var reader = new FileReader();
-            
+
             reader.onload = function (e) {
                 $('#category-img-tag').attr('src', e.target.result);
-            }
-            reader.readAsDataURL(input.files[0]);
-        }
-    }
-    function readURL2(input) {
-        if (input.files && input.files[0]) {
-
-
-            var reader = new FileReader();
-            
-            reader.onload = function (e) {
-                $('#category-edit-tag').attr('src', e.target.result);
             }
             reader.readAsDataURL(input.files[0]);
         }
@@ -345,17 +240,11 @@
     $("#category-img").change(function(){
         readURL(this);
     });
-    $("#category-edit-img").change(function(){
-        readURL2(this);
-    });
-
-
-   
 </script>
 <script>
     $(function(){
         $('#name_ru').slugIt();
     });
 </script>
-  
+
 @endsection
